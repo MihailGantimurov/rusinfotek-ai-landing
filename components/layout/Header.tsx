@@ -33,15 +33,15 @@ export function Header() {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         onHero && !open
           ? 'bg-transparent'
-          : 'border-b border-oxford/8 bg-[#fbfbfa]/82 shadow-[0_8px_34px_rgba(7,23,42,.05)] backdrop-blur-xl'
+          : 'border-b border-oxford/8 bg-[#f7f7f5]/88 shadow-[0_12px_44px_rgba(7,23,42,.055)] backdrop-blur-xl'
       }`}
     >
-      <div className="mx-auto flex h-[78px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div className="mx-auto flex h-[82px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16">
         <Link href="/" aria-label="РусИнфоТек — главная">
           <Logo inverse={darkMode} />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Основная навигация">
+        <nav className="hidden items-center gap-7 xl:gap-9 lg:flex" aria-label="Основная навигация">
           {navigation.map((item) => (
             <Link
               className={`text-[14px] font-medium transition-colors ${
@@ -57,15 +57,15 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <Link
-            className={`group hidden min-h-11 items-center gap-2 rounded-xl px-5 text-[14px] font-semibold transition-all sm:inline-flex ${
+            className={`group hidden min-h-12 items-stretch overflow-hidden rounded-[13px] border text-[14px] font-semibold transition-all sm:inline-flex ${
               darkMode
-                ? 'bg-white text-[#0b1c32] hover:bg-white/90'
-                : 'bg-[#183b67] text-white shadow-[0_10px_24px_rgba(24,59,103,.14)] hover:bg-[#214a7b]'
+                ? 'border-white/65 bg-white text-[#0b1c32] hover:bg-white/92'
+                : 'border-[#203f66] bg-[linear-gradient(135deg,#17385f,#0e294b)] text-white shadow-[0_12px_30px_rgba(24,59,103,.16)]'
             }`}
             href="/contacts"
           >
-            Получить коммерческое предложение
-            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <span className="flex items-center px-4 xl:px-5">Получить коммерческое предложение</span>
+            <span className="grid min-w-11 place-items-center border-l border-current/12 bg-white/[0.06]"><ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
           </Link>
           <button
             aria-expanded={open}
@@ -103,7 +103,7 @@ export function Header() {
                 </Link>
               ))}
               <Link
-                className="mt-3 inline-flex min-h-12 items-center justify-center rounded-xl bg-[#183b67] px-5 text-center text-sm font-semibold text-white"
+                className="mt-3 inline-flex min-h-12 items-center justify-center rounded-[13px] bg-[linear-gradient(135deg,#17385f,#0e294b)] px-5 text-center text-sm font-semibold text-white"
                 href="/contacts"
                 onClick={() => setOpen(false)}
               >

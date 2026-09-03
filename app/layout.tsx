@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Geist_Mono, Manrope } from 'next/font/google';
+import { Commissioner, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const manrope = Manrope({
-  variable: '--font-manrope',
+const commissioner = Commissioner({
+  variable: '--font-commissioner',
   subsets: ['cyrillic', 'latin'],
   display: 'swap',
 });
@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${manrope.variable} ${geistMono.variable} antialiased`}
+        className={`${commissioner.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,116 +1,93 @@
 'use client';
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
-import { DigitalDepth } from '@/components/shared/DigitalDepth';
+import { HeroMedia } from '@/components/home/HeroMedia';
+import { BrandButton } from '@/components/shared/BrandButton';
 
-const activityLabels = [
-  { label: 'Заявки', state: 'В работе', className: 'right-[11%] top-[24%]' },
-  { label: 'Документы', state: 'Синхронизировано', className: 'right-[6%] bottom-[22%]' },
-  { label: 'Перевозки', state: 'Активно', className: 'right-[36%] bottom-[13%]' },
-];
+const directions = ['Продажи', 'Логистика', 'Производство', 'Документооборот'];
 
 export function Hero() {
+  const rootRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const pointerX = useSpring(useMotionValue(0), { stiffness: 38, damping: 22, mass: 0.9 });
-  const pointerY = useSpring(useMotionValue(0), { stiffness: 38, damping: 22, mass: 0.9 });
-
-  function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
-    if (reduceMotion || event.pointerType !== 'mouse') return;
-
-    const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 14);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 12);
-  }
-
-  function resetPointer() {
-    pointerX.set(0);
-    pointerY.set(0);
-  }
+  const { scrollYProgress } = useScroll({ target: rootRef, offset: ['start start', 'end start'] });
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 72]);
+  const mediaY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 132]);
+  const mediaScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 0.93]);
 
   return (
     <section
+      ref={rootRef}
       id="top"
-      className="relative bg-[#07172a] px-3 pt-3 text-white sm:px-5 sm:pt-5 lg:min-h-[95svh] lg:px-8 lg:pt-8"
-      onPointerLeave={resetPointer}
-      onPointerMove={handlePointerMove}
+      className="hero-shell relative isolate overflow-hidden bg-[#07172a] px-4 pb-28 pt-24 text-white sm:px-7 sm:pb-36 sm:pt-28 lg:min-h-[100svh] lg:px-10 lg:pb-44 lg:pt-32 xl:px-16"
     >
-      <div className="relative isolate min-h-[760px] overflow-hidden rounded-[24px] bg-[#0c2240] sm:min-h-[780px] sm:rounded-[30px] lg:min-h-[calc(95svh-2rem)]">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_78%_25%,rgba(111,126,227,.48),transparent_27%),radial-gradient(circle_at_13%_94%,rgba(92,123,177,.3),transparent_35%),linear-gradient(124deg,#07172a_2%,#102d53_56%,#173a63_100%)]"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-[#07172a]/88 via-[#07172a]/32 to-transparent" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[54%] bg-linear-to-t from-[#07172a]/86 via-[#07172a]/30 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_76%_19%,rgba(94,91,188,.23),transparent_30%),radial-gradient(circle_at_20%_72%,rgba(20,112,134,.18),transparent_31%),linear-gradient(135deg,#061426_0%,#0b2341_48%,#07182c_100%)]" />
+      <div aria-hidden="true" className="hero-grain absolute inset-0 opacity-30" />
 
-        <motion.div
-          className="absolute inset-0"
-          initial={reduceMotion ? false : { scale: 1.025, opacity: 0.76 }}
-          animate={reduceMotion ? undefined : { scale: 1, opacity: 1 }}
-          transition={{ duration: 1.7, ease: [0.22, 0.72, 0.24, 1] }}
-          style={reduceMotion ? undefined : { x: pointerX, y: pointerY }}
-        >
-          <DigitalDepth variant="hero" />
+      <div className="relative mx-auto grid max-w-[1440px] min-w-0 items-center gap-12 lg:grid-cols-[.86fr_1.14fr] lg:gap-12 xl:gap-20">
+        <motion.div className="relative z-10 min-w-0 pt-3 lg:pt-0" style={{ y: copyY }}>
+          <motion.p
+            className="text-[12px] font-semibold tracking-[0.11em] text-[#aebeff]"
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.68, delay: 0.08 }}
+          >
+            AI-АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ
+          </motion.p>
+
+          <motion.h1
+            className="mt-5 max-w-full text-balance text-[clamp(2.25rem,9.4vw,3.5rem)] font-[560] leading-[.98] tracking-[-0.052em] sm:text-[clamp(2.65rem,6vw,4.4rem)] lg:max-w-[780px] lg:text-[clamp(2.65rem,5.1vw,5.5rem)] lg:tracking-[-0.058em]"
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.82, delay: 0.16, ease: [0.22, 0.72, 0.24, 1] }}
+          >
+            Автоматизируем процессы, на которых работает бизнес.
+          </motion.h1>
+
+          <motion.p
+            className="mt-6 max-w-[620px] text-[17px] leading-[1.7] text-white/68 sm:text-[18px]"
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.72, delay: 0.28 }}
+          >
+            AI-системы для продаж, логистики, производства и документооборота. Интегрируем решения в существующую инфраструктуру компании.
+          </motion.p>
+
+          <motion.div
+            className="mt-8 flex flex-col gap-3 sm:flex-row"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.68, delay: 0.38 }}
+          >
+            <BrandButton className="w-full sm:w-auto" href="/contacts" tone="light">Получить коммерческое предложение</BrandButton>
+            <BrandButton className="w-full sm:w-auto" href="#directions" direction="down" tone="quiet">Смотреть решения</BrandButton>
+          </motion.div>
+
+          <motion.nav
+            aria-label="Направления автоматизации"
+            className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/12 pt-5"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={reduceMotion ? undefined : { opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.48 }}
+          >
+            {directions.map((direction, index) => (
+              <a className="group inline-flex items-center gap-2 text-[13px] text-white/54 transition-colors hover:text-white" href="#directions" key={direction}>
+                <span className="font-mono text-[10px] text-[#91a6ff]">0{index + 1}</span>
+                {direction}
+              </a>
+            ))}
+          </motion.nav>
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-0 hidden lg:block">
-          {activityLabels.map((item, index) => (
-            <motion.div
-              className={`absolute rounded-xl border border-white/14 bg-white/[0.08] px-4 py-3 shadow-[0_18px_52px_rgba(1,12,35,.14)] backdrop-blur-md ${item.className}`}
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.62 + index * 0.12, ease: [0.22, 0.72, 0.24, 1] }}
-              key={item.label}
-            >
-              <p className="text-sm font-semibold text-white">{item.label}</p>
-              <p className="mt-1 text-xs text-white/56">{item.state}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <p className="absolute right-6 top-24 text-right text-xs leading-relaxed text-white/45 sm:right-9 lg:right-12 lg:top-28">
-          Будущий визуальный материал
-        </p>
-
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-9 pt-32 sm:px-10 sm:pb-12 lg:px-16 lg:pb-14 xl:px-20">
-          <motion.div
-            className="max-w-[670px]"
-            initial={reduceMotion ? false : { opacity: 0, y: 26 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 0.72, 0.24, 1] }}
-          >
-            <p className="text-[12px] font-semibold tracking-[0.08em] text-white/64">
-              AI-АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ
-            </p>
-            <h1 className="mt-5 max-w-[860px] text-balance text-[clamp(2.55rem,3.75vw,4.7rem)] font-medium leading-[1.02] tracking-[-0.06em]">
-              Автоматизируем процессы,<br className="hidden sm:block" /> на которых работает бизнес.
-            </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/72 sm:text-lg">
-              AI-системы для продаж, логистики, производства и документооборота. Интегрируем решения в существующую инфраструктуру компании.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-4 text-[14px] font-semibold text-[#0c2140] transition-transform hover:-translate-y-0.5 sm:px-6 sm:text-[15px]"
-                href="/contacts"
-              >
-                Получить коммерческое предложение
-                <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
-              <a
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white/10 px-6 text-[15px] font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/16"
-                href="#directions"
-              >
-                Смотреть решения
-                <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
+        <motion.div className="relative min-w-0 lg:-mr-12 xl:-mr-20" style={{ y: mediaY, scale: mediaScale }}>
+          <div aria-hidden="true" className="absolute -inset-8 bg-[radial-gradient(circle,rgba(78,103,204,.26),transparent_68%)] blur-3xl" />
+          <HeroMedia />
+        </motion.div>
       </div>
 
-      <div aria-hidden="true" className="relative z-10 mx-auto -mb-px h-20 max-w-[1380px] bg-linear-to-b from-[#07172a] to-[#f7f7f5] sm:h-28" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-44 bg-linear-to-b from-transparent via-[#0c2440]/58 to-[#eef0ee]" />
+      <div aria-hidden="true" className="absolute -bottom-1 left-1/2 h-20 w-[112%] -translate-x-1/2 rounded-t-[50%] bg-[#eef0ee] blur-[1px]" />
     </section>
   );
 }

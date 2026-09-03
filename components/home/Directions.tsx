@@ -1,195 +1,156 @@
 'use client';
 
-import { useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRef, useState } from 'react';
 
-import { DigitalDepth } from '@/components/shared/DigitalDepth';
-import { directions, type Direction } from '@/content/directions';
+import { BrandButton } from '@/components/shared/BrandButton';
+import { MediaFrame } from '@/components/shared/MediaFrame';
+import { directions } from '@/content/directions';
 
-const compositions = {
-  split: {
-    frame: 'lg:grid-cols-[.38fr_.62fr]',
-    copy: 'lg:order-1 lg:pr-8',
-    visual: 'lg:order-2',
+const atmospheres = {
+  sales: {
+    palette: 'from-[#171f4d] via-[#5a4e90] to-[#b39dcc]',
+    glow: 'bg-[#9a79dc]/32',
+    note: 'sales · image / video / interface ready',
   },
-  overlay: {
-    frame: 'lg:grid-cols-1',
-    copy: 'lg:absolute lg:bottom-10 lg:left-10 lg:z-10 lg:max-w-[430px] lg:rounded-3xl lg:bg-[#0e2546]/64 lg:p-8 lg:text-white lg:backdrop-blur-md',
-    visual: 'lg:col-span-full',
+  logistics: {
+    palette: 'from-[#0d2d50] via-[#37748e] to-[#9bc3c8]',
+    glow: 'bg-[#5eabc2]/28',
+    note: 'logistics · image / video / interface ready',
   },
-  reverse: {
-    frame: 'lg:grid-cols-[.62fr_.38fr]',
-    copy: 'lg:order-2 lg:pl-8',
-    visual: 'lg:order-1',
+  production: {
+    palette: 'from-[#172739] via-[#596d7f] to-[#b7bdc1]',
+    glow: 'bg-[#9faebc]/28',
+    note: 'production · image / video / interface ready',
   },
-  editorial: {
-    frame: 'lg:grid-cols-[.48fr_.52fr]',
-    copy: 'lg:order-1 lg:self-end lg:pb-10 lg:pr-12',
-    visual: 'lg:order-2',
+  documents: {
+    palette: 'from-[#251c43] via-[#72527e] to-[#c6abc5]',
+    glow: 'bg-[#b277b5]/28',
+    note: 'documents · image / video / interface ready',
   },
 };
 
-function DirectionMedia({ direction }: { direction: Direction }) {
-  const palette = {
-    sales: 'from-[#1c2558] via-[#474288] to-[#a08cd3]',
-    logistics: 'from-[#102f57] via-[#316b94] to-[#97c6d7]',
-    production: 'from-[#17283a] via-[#526984] to-[#afb7c3]',
-    documents: 'from-[#261d44] via-[#754d82] to-[#c9a5ce]',
-  };
-
-  return (
-    <figure className={`relative min-h-[410px] overflow-hidden rounded-[26px] bg-linear-to-br sm:min-h-[500px] lg:min-h-[610px] ${palette[direction.visual]}`}>
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_84%,rgba(255,255,255,.18),transparent_29%),linear-gradient(145deg,rgba(3,12,30,.2),transparent_55%)]" />
-      <DigitalDepth variant={direction.visual} />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-[#07172a]/62 to-transparent" />
-      <figcaption className="absolute bottom-6 left-6 right-6 text-sm leading-relaxed text-white/68 sm:bottom-8 sm:left-8 sm:right-8">
-        <span className="block font-semibold text-white">Будущий визуальный материал</span>
-        <span className="mt-1 block">{direction.mediaDirection}</span>
-      </figcaption>
-    </figure>
-  );
-}
-
-function DirectionCopy({ direction, overlay }: { direction: Direction; overlay: boolean }) {
-  const textTone = overlay ? 'text-white' : 'text-oxford';
-  const mutedTone = overlay ? 'text-white/70' : 'text-oxford/64';
-  const linkTone = overlay ? 'bg-white text-[#102b4c]' : 'bg-[#183b67] text-white';
-
-  return (
-    <div className="relative">
-      <p className={`text-sm font-semibold tracking-[0.08em] ${overlay ? 'text-white/64' : 'text-[#5c70c0]'}`}>
-        {direction.number}
-      </p>
-      <h3 className={`mt-4 text-balance text-[clamp(2.45rem,4vw,4.6rem)] font-medium leading-[1.02] tracking-[-0.055em] ${textTone}`}>
-        {direction.title}
-      </h3>
-      <p className={`mt-5 max-w-md text-[17px] leading-relaxed ${mutedTone}`}>{direction.description}</p>
-
-      <ul className={`mt-8 hidden gap-x-7 gap-y-3 text-sm leading-relaxed md:grid md:grid-cols-2 ${mutedTone}`}>
-        {direction.modules.map((module) => (
-          <li className="flex items-start gap-2.5" key={module}>
-            <span className={`mt-[0.6em] size-1.5 shrink-0 rounded-full ${overlay ? 'bg-white/72' : 'bg-[#7185d6]'}`} />
-            {module}
-          </li>
-        ))}
-      </ul>
-
-      <details className={`mt-7 text-sm md:hidden ${mutedTone}`}>
-        <summary className="cursor-pointer font-semibold">Модули направления</summary>
-        <ul className="mt-4 grid gap-3">
-          {direction.modules.map((module) => (
-            <li className="flex items-start gap-2.5" key={module}>
-              <span className={`mt-[0.6em] size-1.5 shrink-0 rounded-full ${overlay ? 'bg-white/72' : 'bg-[#7185d6]'}`} />
-              {module}
-            </li>
-          ))}
-        </ul>
-      </details>
-
-      <Link className={`group mt-9 inline-flex min-h-12 items-center gap-2 rounded-xl px-5 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${linkTone}`} href={direction.href}>
-        Подробнее
-        <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </Link>
-    </div>
-  );
-}
-
 export function Directions() {
-  const [activeValue, setActiveValue] = useState(directions[0].href);
-  const [direction, setDirection] = useState(1);
+  const rootRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [travelDirection, setTravelDirection] = useState(1);
   const reduceMotion = useReducedMotion();
-  const activeIndex = directions.findIndex((item) => item.href === activeValue);
-  const activeDirection = directions[activeIndex] ?? directions[0];
-  const composition = compositions[activeDirection.layout];
-  const overlay = activeDirection.layout === 'overlay';
+  const { scrollYProgress } = useScroll({ target: rootRef, offset: ['start start', 'end end'] });
 
-  function showDirection(index: number) {
-    const normalizedIndex = (index + directions.length) % directions.length;
-    setDirection(normalizedIndex > activeIndex ? 1 : -1);
-    setActiveValue(directions[normalizedIndex].href);
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    if (typeof window === 'undefined' || window.innerWidth < 1024) return;
+    const next = Math.min(directions.length - 1, Math.floor(value * directions.length));
+    setActiveIndex((current) => {
+      if (current !== next) setTravelDirection(next > current ? 1 : -1);
+      return next;
+    });
+  });
+
+  const direction = directions[activeIndex] ?? directions[0];
+  const atmosphere = atmospheres[direction.visual];
+
+  function selectDirection(index: number, updateScroll = true) {
+    const next = (index + directions.length) % directions.length;
+    setTravelDirection(next > activeIndex ? 1 : -1);
+    setActiveIndex(next);
+
+    if (updateScroll && rootRef.current && window.matchMedia('(min-width: 1024px)').matches) {
+      const top = rootRef.current.getBoundingClientRect().top + window.scrollY;
+      const range = rootRef.current.offsetHeight - window.innerHeight;
+      window.scrollTo({ top: top + range * ((next + 0.12) / directions.length), behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+  }
+
+  function handleTabKey(event: React.KeyboardEvent<HTMLButtonElement>, index: number) {
+    let next: number | null = null;
+    if (event.key === 'ArrowRight') next = index + 1;
+    if (event.key === 'ArrowLeft') next = index - 1;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = directions.length - 1;
+    if (next === null) return;
+
+    event.preventDefault();
+    const normalized = (next + directions.length) % directions.length;
+    selectDirection(normalized);
+    requestAnimationFrame(() => document.getElementById(`direction-tab-${normalized}`)?.focus());
   }
 
   return (
-    <section id="directions" className="relative bg-[#f7f7f5] px-5 pb-24 pt-16 sm:px-8 sm:pb-28 sm:pt-20 lg:min-h-[92svh] lg:px-12 lg:pb-32 lg:pt-24 xl:px-16">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-[0.08em] text-[#5c70c0]">РЕШЕНИЯ</p>
-          <h2 className="mt-4 text-balance text-[clamp(2.3rem,4.2vw,4.9rem)] font-medium leading-[1.06] tracking-[-0.055em] text-oxford">
-            AI для ключевых процессов компании
-          </h2>
+    <section ref={rootRef} id="directions" className="relative bg-[#eef0ee] px-5 pb-24 sm:px-8 sm:pb-28 lg:h-[410vh] lg:px-12 lg:pb-0 xl:px-16">
+      <div className="mx-auto max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:overflow-hidden lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-[.76fr_1.24fr] lg:items-end">
+          <div>
+            <p className="section-label">РЕШЕНИЯ</p>
+            <h2 className="mt-4 max-w-3xl text-[clamp(2.3rem,4vw,4.7rem)] font-[540] leading-[1.03] tracking-[-0.05em] text-[#10233b]">AI для ключевых процессов компании</h2>
+          </div>
+          <p className="max-w-2xl text-[16px] leading-[1.7] text-[#10233b]/56 lg:justify-self-end lg:text-[17px]">Прокрутка последовательно раскрывает четыре направления. Выберите нужное напрямую или продолжайте движение по странице.</p>
         </div>
 
-        <div className="mt-9 flex w-full gap-1 overflow-x-auto pb-2" role="tablist" aria-label="Направления автоматизации">
+        <div className="mt-9 flex w-full gap-0 overflow-x-auto border-b border-[#10233b]/12" role="tablist" aria-label="Направления автоматизации">
           {directions.map((item, index) => {
-            const selected = item.href === activeValue;
-
+            const selected = index === activeIndex;
             return (
               <button
-                aria-controls="direction-slide"
+                aria-controls="direction-panel"
                 aria-selected={selected}
-                className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-offset-2 ${
-                  selected ? 'bg-[#183b67] text-white' : 'text-oxford/54 hover:bg-white hover:text-oxford'
-                }`}
+                className={`relative shrink-0 px-4 py-3 text-[14px] font-medium transition-colors first:pl-0 sm:px-6 ${selected ? 'text-[#10233b]' : 'text-[#10233b]/40 hover:text-[#10233b]/72'}`}
                 key={item.href}
-                onClick={() => showDirection(index)}
+                onClick={() => selectDirection(index)}
+                onKeyDown={(event) => handleTabKey(event, index)}
                 role="tab"
                 tabIndex={selected ? 0 : -1}
                 type="button"
+                id={`direction-tab-${index}`}
               >
-                {item.title}
+                <span className="mr-2 font-mono text-[10px] text-[#6075c7]">{item.number}</span>{item.title}
+                <span className={`absolute inset-x-0 -bottom-px h-0.5 bg-[#536bc1] transition-transform duration-500 ${selected ? 'scale-x-100' : 'scale-x-0'}`} />
               </button>
             );
           })}
         </div>
 
-        <AnimatePresence custom={direction} mode="wait">
+        <AnimatePresence custom={travelDirection} mode="wait">
           <motion.article
-            className={`relative mt-8 grid gap-8 lg:mt-10 lg:items-center ${composition.frame}`}
-            id="direction-slide"
-            role="tabpanel"
-            custom={direction}
+            className="relative mt-7 grid gap-8 lg:mt-9 lg:grid-cols-[.7fr_1.3fr] lg:items-center"
+            custom={travelDirection}
             drag={reduceMotion ? false : 'x'}
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.08}
-            initial={reduceMotion ? false : { opacity: 0, x: direction * 28, clipPath: 'inset(0 0 8% 0 round 26px)' }}
-            animate={reduceMotion ? undefined : { opacity: 1, x: 0, clipPath: 'inset(0 0 0% 0 round 26px)' }}
-            exit={reduceMotion ? undefined : { opacity: 0, x: direction * -20, clipPath: 'inset(8% 0 0 0 round 26px)' }}
+            dragElastic={0.06}
+            id="direction-panel"
+            key={direction.href}
+            role="tabpanel"
+            initial={reduceMotion ? false : { opacity: 0, y: 20, x: travelDirection * 18 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0, x: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -12, x: travelDirection * -14 }}
             onDragEnd={(_, info) => {
-              if (info.offset.x < -70) showDirection(activeIndex + 1);
-              if (info.offset.x > 70) showDirection(activeIndex - 1);
+              if (info.offset.x < -60) selectDirection(activeIndex + 1, false);
+              if (info.offset.x > 60) selectDirection(activeIndex - 1, false);
             }}
-            transition={{ duration: 0.58, ease: [0.22, 0.72, 0.24, 1] }}
-            key={activeDirection.href}
+            transition={{ duration: 0.52, ease: [0.22, 0.72, 0.24, 1] }}
           >
-            <div className={composition.copy}>
-              <DirectionCopy direction={activeDirection} overlay={overlay} />
+            <div className="relative z-10 py-2 lg:pr-5">
+              <p className="font-mono text-[11px] tracking-[0.12em] text-[#6075c7]">{direction.number} / 04</p>
+              <h3 className="mt-4 text-[clamp(2.55rem,4.2vw,5rem)] font-[540] leading-[.98] tracking-[-0.055em] text-[#10233b]">{direction.title}</h3>
+              <p className="mt-5 max-w-lg text-[17px] leading-[1.7] text-[#10233b]/60">{direction.description}</p>
+              <ul className="mt-7 grid max-w-xl gap-x-6 gap-y-2.5 sm:grid-cols-2">
+                {direction.modules.map((module) => (
+                  <li className="flex items-start gap-2.5 text-[14px] leading-relaxed text-[#10233b]/62" key={module}><span className="mt-[.65em] size-1.5 shrink-0 rounded-full bg-[#6075c7]" />{module}</li>
+                ))}
+              </ul>
+              <BrandButton className="mt-8" href={direction.href}>Подробнее о направлении</BrandButton>
             </div>
-            <div className={composition.visual}>
-              <DirectionMedia direction={activeDirection} />
+
+            <div className="relative">
+              <div aria-hidden="true" className={`absolute -inset-8 rounded-full blur-[90px] ${atmosphere.glow}`} />
+              <MediaFrame className="min-h-[410px] rounded-[26px] sm:min-h-[500px] lg:min-h-[52vh] lg:max-h-[570px]" label={atmosphere.note} palette={atmosphere.palette} />
             </div>
           </motion.article>
         </AnimatePresence>
 
-        <div className="mt-7 flex items-center gap-3 lg:mt-9">
-          <button
-            aria-label="Предыдущее направление"
-            className="grid size-11 place-items-center rounded-full bg-white text-oxford shadow-[0_7px_20px_rgba(16,35,59,.07)] transition-transform hover:-translate-y-0.5"
-            onClick={() => showDirection(activeIndex - 1)}
-            type="button"
-          >
-            <ArrowLeft className="size-4" />
-          </button>
-          <button
-            aria-label="Следующее направление"
-            className="grid size-11 place-items-center rounded-full bg-[#183b67] text-white shadow-[0_7px_20px_rgba(24,59,103,.16)] transition-transform hover:-translate-y-0.5"
-            onClick={() => showDirection(activeIndex + 1)}
-            type="button"
-          >
-            <ArrowRight className="size-4" />
-          </button>
-          <p className="ml-2 text-sm text-oxford/48">{activeDirection.number} / 04</p>
+        <div className="mt-6 flex items-center gap-3 lg:hidden">
+          <button aria-label="Предыдущее направление" className="grid size-11 place-items-center rounded-[12px] border border-[#10233b]/12 bg-white text-[#10233b]" onClick={() => selectDirection(activeIndex - 1, false)} type="button"><ArrowLeft className="size-4" /></button>
+          <button aria-label="Следующее направление" className="grid size-11 place-items-center rounded-[12px] bg-[#17385f] text-white" onClick={() => selectDirection(activeIndex + 1, false)} type="button"><ArrowRight className="size-4" /></button>
         </div>
       </div>
     </section>

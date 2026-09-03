@@ -1,52 +1,49 @@
-import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { Logo } from '@/components/layout/Logo';
 
-const footerLinks = [
-  { label: 'Решения', href: '/solutions/sales' },
-  { label: 'Кейсы', href: '/cases' },
-  { label: 'Компания', href: '/company' },
-  { label: 'Безопасность', href: '/security' },
-  { label: 'Блог и новости', href: '/blog' },
-  { label: 'Контакты', href: '/contacts' },
+const columns = [
+  {
+    title: 'Решения',
+    links: [
+      ['Продажи', '/solutions/sales'],
+      ['Логистика', '/solutions/logistics'],
+      ['Производство', '/solutions/production'],
+      ['Документооборот', '/solutions/documents'],
+    ],
+  },
+  {
+    title: 'Компания',
+    links: [
+      ['Кейсы', '/cases'],
+      ['О компании', '/company'],
+      ['Безопасность', '/security'],
+      ['Блог и новости', '/blog'],
+    ],
+  },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#07172a] px-5 text-white sm:px-8 lg:px-12 xl:px-16">
-      <div aria-hidden="true" className="absolute -right-28 -top-40 size-[34rem] rounded-full bg-[#344e9d]/28 blur-[110px]" />
-      <div className="relative mx-auto max-w-[1440px]">
-        <div className="grid gap-12 py-20 md:grid-cols-[1.25fr_.75fr] md:py-24 lg:py-28">
+    <footer className="border-t border-white/10 bg-[#061426] px-5 text-white sm:px-8 lg:px-12 xl:px-16">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="grid gap-12 py-14 md:grid-cols-[1.25fr_.75fr_.75fr] lg:py-18">
           <div>
             <Logo inverse />
-            <h2 className="mt-10 max-w-3xl text-balance text-[clamp(2rem,3.8vw,4.1rem)] font-medium leading-[1.06] tracking-[-0.05em]">
-              Цифровые системы для реального бизнеса.
-            </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-[1.7] text-white/50">AI-системы для автоматизации процессов, на которых работает бизнес.</p>
           </div>
-          <div className="self-end md:justify-self-end">
-            <p className="max-w-sm text-base leading-relaxed text-white/62">
-              Обсудим, какие процессы стоит автоматизировать в первую очередь.
-            </p>
-            <Link
-              className="group mt-7 inline-flex items-center gap-3 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[#0b1c32] transition-transform hover:-translate-y-0.5"
-              href="/contacts"
-            >
-              Обсудить задачу
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+          {columns.map((column) => (
+            <nav aria-label={column.title} key={column.title}>
+              <p className="text-[12px] font-semibold tracking-[0.09em] text-white/36">{column.title.toUpperCase()}</p>
+              <div className="mt-4 flex flex-col gap-3">
+                {column.links.map(([label, href]) => <Link className="text-[14px] text-white/62 transition-colors hover:text-white" href={href} key={href}>{label}</Link>)}
+              </div>
+            </nav>
+          ))}
         </div>
-
-        <div className="flex flex-col gap-7 border-t border-white/12 py-8 lg:flex-row lg:items-center lg:justify-between">
-          <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Навигация в подвале">
-            {footerLinks.map((item) => (
-              <Link className="text-sm text-white/58 transition-colors hover:text-white" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <p className="text-sm text-white/38">© 2026 РусИнфоТек</p>
+        <div className="flex flex-col gap-4 border-t border-white/10 py-7 text-[13px] text-white/34 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 РусИнфоТек</p>
+          <Link className="transition-colors hover:text-white/68" href="/contacts">Контакты</Link>
         </div>
       </div>
     </footer>
