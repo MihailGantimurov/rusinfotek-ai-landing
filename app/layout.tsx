@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Onest } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const onest = Onest({
+  variable: '--font-onest',
+  subsets: ['cyrillic', 'latin'],
 });
 
 const geistMono = Geist_Mono({
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ),
   title: 'РусИнфоТек — AI-автоматизация бизнеса',
   description:
-    'Модульная AI-автоматизация полного цикла: от заявки до оплаты. Внедрение за 2 недели без остановки бизнеса.',
+    'AI-системы для автоматизации операционных процессов, интегрированные с инфраструктурой компании.',
   alternates: { canonical: '/' },
   icons: { icon: '/favicon.svg' },
   keywords: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: 'ru_RU',
     title: 'РусИнфоТек — AI-автоматизация бизнеса',
     description:
-      'От заявки до оплаты — без ручной рутины. Модульная AI-автоматизация бизнеса.',
+      'AI-системы для автоматизации операционных процессов и работы целых отделов.',
     url: '/',
     siteName: 'РусИнфоТек',
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: 'https://rusinfotek-ai-automation.apocritonsapeiens.chatgpt.site/og.png',
         width: 1200,
         height: 630,
-        alt: 'РусИнфоТек — от заявки до оплаты без ручной рутины',
+        alt: 'РусИнфоТек — AI-автоматизация операционных процессов',
       },
     ],
   },
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'РусИнфоТек — AI-автоматизация бизнеса',
     description:
-      'От заявки до оплаты — без ручной рутины. Модульная AI-автоматизация бизнеса.',
+      'AI-системы для автоматизации операционных процессов и работы целых отделов.',
     images: [
       'https://rusinfotek-ai-automation.apocritonsapeiens.chatgpt.site/og.png',
     ],
@@ -62,9 +62,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="dark">
+    <html lang="ru">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${onest.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

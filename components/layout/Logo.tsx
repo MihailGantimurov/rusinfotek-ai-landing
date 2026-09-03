@@ -1,8 +1,27 @@
-export function Logo() {
+type LogoProps = {
+  inverse?: boolean;
+};
+
+export function Logo({ inverse = false }: LogoProps) {
   return (
-    <span className="flex items-center gap-2.5">
-      <span className="relative text-xl font-black tracking-[-0.08em] text-primary">TR<span className="absolute -right-1 -top-0.5 size-1 bg-primary shadow-[0_0_8px_#00FFE8]" /></span>
-      <span className="text-[15px] font-medium tracking-[-0.02em] text-white">РусИнфоТек</span>
+    <span className="inline-flex items-center gap-3" aria-label="РусИнфоТек">
+      <span
+        aria-hidden="true"
+        className={`grid size-7 place-items-center border text-[10px] font-semibold tracking-[-0.04em] ${
+          inverse
+            ? 'border-white/24 text-turquoise'
+            : 'border-oxford/20 text-oxford'
+        }`}
+      >
+        TR
+      </span>
+      <span
+        className={`text-[17px] font-semibold tracking-[-0.035em] ${
+          inverse ? 'text-white' : 'text-oxford'
+        }`}
+      >
+        РусИнфоТек
+      </span>
     </span>
   );
 }
