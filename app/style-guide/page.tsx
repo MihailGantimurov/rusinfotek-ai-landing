@@ -1,78 +1,87 @@
 import Link from 'next/link';
 
 const colors = [
-  { name: 'Black', value: '#000000', className: 'bg-black text-white' },
-  { name: 'White', value: '#FFFFFF', className: 'border border-oxford/12 bg-white text-oxford' },
-  { name: 'Oxford Blue', value: '#002147', className: 'bg-oxford text-white' },
-  { name: 'Turquoise', value: '#00FFE8', className: 'bg-turquoise text-oxford' },
-  { name: 'Dark Green', value: '#001A00', className: 'bg-[#001A00] text-white' },
+  { name: 'Warm off-white', value: '#F7F7F5', className: 'border border-oxford/8 bg-[#f7f7f5] text-oxford' },
+  { name: 'White', value: '#FFFFFF', className: 'border border-oxford/8 bg-white text-oxford' },
+  { name: 'Deep navy', value: '#07172A', className: 'bg-[#07172a] text-white' },
+  { name: 'Premium blue', value: '#183B67', className: 'bg-[#183b67] text-white' },
+  { name: 'Cyan accent', value: '#00FFE8', className: 'bg-[#00ffe8] text-[#07172a]' },
 ];
 
 export default function StyleGuidePage() {
   return (
-    <main className="min-h-screen bg-background px-5 py-16 text-foreground sm:px-8 lg:px-12">
+    <main className="min-h-screen bg-[#f7f7f5] px-5 py-12 text-foreground sm:px-8 sm:py-16 lg:px-12 xl:px-16">
       <div className="mx-auto max-w-[1280px]">
-        <div className="flex items-center justify-between border-b border-oxford/14 pb-6">
+        <div className="flex items-start justify-between gap-6">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-oxford/44">Internal / Visual foundation</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-oxford sm:text-6xl">Style guide</h1>
+            <p className="text-sm font-semibold tracking-[0.08em] text-[#5c70c0]">INTERNAL STYLE GUIDE</p>
+            <h1 className="mt-4 text-balance text-[clamp(2.8rem,5vw,5.5rem)] font-medium leading-[1.03] tracking-[-0.06em] text-oxford">Cinematic enterprise</h1>
           </div>
-          <Link className="text-sm font-medium text-oxford underline decoration-oxford/25 underline-offset-4" href="/">Главная</Link>
+          <Link className="mt-1 text-sm font-semibold text-oxford underline decoration-oxford/25 underline-offset-4" href="/">Главная</Link>
         </div>
 
-        <section className="py-14">
-          <h2 className="text-sm font-medium uppercase tracking-[0.08em] text-oxford/48">Цвета</h2>
+        <section className="mt-16">
+          <h2 className="text-lg font-semibold text-oxford">Палитра</h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {colors.map((color) => (
-              <div className={`flex min-h-36 flex-col justify-between p-5 ${color.className}`} key={color.name}>
-                <span className="text-sm font-medium">{color.name}</span>
-                <span className="font-mono text-[11px] opacity-60">{color.value}</span>
+              <div className={`flex min-h-36 flex-col justify-between rounded-2xl p-5 ${color.className}`} key={color.name}>
+                <span className="text-sm font-semibold">{color.name}</span>
+                <span className="text-sm opacity-62">{color.value}</span>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="grid gap-12 border-t border-oxford/14 py-14 lg:grid-cols-2">
+        <section className="mt-16 grid gap-12 border-t border-oxford/10 py-14 lg:grid-cols-[1.1fr_.9fr]">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-oxford/44">Typography / Display</p>
-            <h2 className="mt-6 text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.92] tracking-[-0.065em] text-oxford">Сложные системы. Ясная логика.</h2>
+            <p className="text-sm font-semibold text-[#5c70c0]">MANROPE / HERO</p>
+            <h2 className="mt-5 max-w-3xl text-balance text-[clamp(2.8rem,5.4vw,5.9rem)] font-medium leading-[1.03] tracking-[-0.06em] text-oxford">Автоматизируем процессы, на которых работает бизнес.</h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-9 self-end">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-oxford/44">Heading</p>
-              <h3 className="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] text-oxford">Автоматизация операционных процессов</h3>
+              <p className="text-sm font-semibold text-[#5c70c0]">H2</p>
+              <h3 className="mt-3 text-4xl font-medium leading-tight tracking-[-0.05em] text-oxford">AI для ключевых процессов компании</h3>
             </div>
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-oxford/44">Body</p>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-oxford/62">Основной текст объясняет сложную технологию простым корпоративным языком и сохраняет комфортную длину строки.</p>
+              <p className="text-sm font-semibold text-[#5c70c0]">Body</p>
+              <p className="mt-3 max-w-xl text-[17px] leading-relaxed text-oxford/64">Нейтральный, комфортный текст для сложных решений и деловой аудитории.</p>
             </div>
           </div>
         </section>
 
-        <section className="border-t border-oxford/14 py-14">
-          <h2 className="text-sm font-medium uppercase tracking-[0.08em] text-oxford/48">Компоненты</h2>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <button className="min-h-12 bg-oxford px-6 text-sm font-medium text-white" type="button">Primary button</button>
-            <button className="min-h-12 border border-oxford/20 bg-white px-6 text-sm font-medium text-oxford" type="button">Secondary button</button>
-            <a className="inline-flex min-h-12 items-center border-b border-oxford/25 text-sm font-medium text-oxford" href="#surfaces">Текстовая ссылка</a>
+        <section className="border-t border-oxford/10 py-14">
+          <h2 className="text-lg font-semibold text-oxford">Навигация и действия</h2>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <button className="min-h-12 rounded-xl bg-[#183b67] px-5 text-sm font-semibold text-white" type="button">Primary CTA</button>
+            <button className="min-h-12 rounded-xl bg-white px-5 text-sm font-semibold text-oxford shadow-[0_8px_20px_rgba(16,35,59,.08)]" type="button">Secondary CTA</button>
+            <a className="px-3 py-3 text-sm font-semibold text-oxford/62" href="#surfaces">Текстовая ссылка</a>
+          </div>
+          <div className="mt-9 flex max-w-xl gap-1 overflow-x-auto rounded-full bg-white p-1.5 shadow-[0_8px_20px_rgba(16,35,59,.06)]">
+            <span className="rounded-full bg-[#183b67] px-4 py-2 text-sm font-semibold text-white">Продажи</span>
+            <span className="px-4 py-2 text-sm font-semibold text-oxford/58">Логистика</span>
+            <span className="px-4 py-2 text-sm font-semibold text-oxford/58">Производство</span>
           </div>
         </section>
 
-        <section id="surfaces" className="grid gap-4 border-t border-oxford/14 py-14 md:grid-cols-2">
-          <div className="min-h-64 border border-oxford/12 bg-white p-7">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-oxford/40">Light surface</p>
-            <div className="mt-12 border-t border-oxford/14 pt-5">
-              <h3 className="text-2xl font-medium tracking-[-0.035em] text-oxford">Архитектурная карточка</h3>
-              <p className="mt-3 text-sm leading-relaxed text-oxford/56">Тонкая граница, прямые углы и строгая иерархия без декоративного шума.</p>
+        <section id="surfaces" className="grid gap-5 border-t border-oxford/10 py-14 md:grid-cols-2">
+          <div className="min-h-72 rounded-[26px] bg-white p-8 shadow-[0_20px_55px_rgba(16,35,59,.06)]">
+            <p className="text-sm font-semibold text-[#5c70c0]">LIGHT SURFACE</p>
+            <h3 className="mt-16 text-3xl font-medium tracking-[-0.05em] text-oxford">Воздух и мягкая глубина</h3>
+            <p className="mt-4 max-w-md text-[17px] leading-relaxed text-oxford/60">Светлые пространства нужны для спокойного чтения и цельной композиции.</p>
+          </div>
+          <div className="relative min-h-72 overflow-hidden rounded-[26px] bg-[#0b2342] p-8 text-white">
+            <div aria-hidden="true" className="absolute -right-12 top-0 size-64 rounded-full bg-[#687ed7]/58 blur-[55px]" />
+            <div aria-hidden="true" className="absolute bottom-8 right-10 h-40 w-32 rotate-[13deg] rounded-[2rem] border border-white/20 bg-white/10 backdrop-blur-md" />
+            <div className="relative">
+              <p className="text-sm font-semibold text-white/62">DEEP BLUE + GLASS</p>
+              <h3 className="mt-16 text-3xl font-medium tracking-[-0.05em]">Abstract digital depth</h3>
+              <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/65">Крупная media-поверхность с мягким светом и стеклянным digital-слоем.</p>
             </div>
           </div>
-          <div className="min-h-64 bg-surface-dark p-7 text-white">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-turquoise/70">Dark surface</p>
-            <div className="mt-12 border-t border-white/14 pt-5">
-              <h3 className="text-2xl font-medium tracking-[-0.035em]">Контрастный системный блок</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/56">Oxford Blue используется для крупных смысловых переходов и важных разделов.</p>
-            </div>
-          </div>
+        </section>
+
+        <section className="border-t border-oxford/10 py-10">
+          <p className="text-sm leading-relaxed text-oxford/56">Радиусы: 10–14 px для элементов интерфейса, 18–32 px для крупных media-поверхностей.</p>
         </section>
       </div>
     </main>

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Geist_Mono, Onest } from 'next/font/google';
+import { Geist_Mono, Manrope } from 'next/font/google';
 import './globals.css';
 
-const onest = Onest({
-  variable: '--font-onest',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['cyrillic', 'latin'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
@@ -64,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${onest.variable} ${geistMono.variable} antialiased`}
+        className={`${manrope.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
