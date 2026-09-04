@@ -1,5 +1,4 @@
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
 
 type BrandButtonProps = {
   children: React.ReactNode;
@@ -24,7 +23,7 @@ export function BrandButton({
   }[tone];
 
   return (
-    <Link
+    <a
       className={`group inline-flex min-h-14 items-stretch overflow-hidden rounded-[14px] border text-[14px] font-semibold transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 focus-visible:outline-offset-3 sm:text-[15px] ${toneClass} ${className}`}
       href={href}
     >
@@ -32,6 +31,6 @@ export function BrandButton({
       <span className="grid min-w-13 place-items-center border-l border-current/12 bg-white/[0.06]">
         <Icon className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </span>
-    </Link>
+    </a>
   );
 }
