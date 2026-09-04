@@ -148,9 +148,6 @@ export function Directions() {
           <motion.article
             className="direction-panel relative mt-7 grid gap-8 lg:mt-6 lg:grid-cols-[.7fr_1.3fr] lg:items-center"
             custom={travelDirection}
-            drag={reduceMotion ? false : 'x'}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.06}
             id="direction-panel"
             key={direction.href}
             role="tabpanel"
@@ -165,10 +162,6 @@ export function Directions() {
                 ? undefined
                 : { opacity: 0, y: -12, x: travelDirection * -14 }
             }
-            onDragEnd={(_, info) => {
-              if (info.offset.x < -60) selectDirection(activeIndex + 1, false);
-              if (info.offset.x > 60) selectDirection(activeIndex - 1, false);
-            }}
             transition={{ duration: 0.52, ease: [0.22, 0.72, 0.24, 1] }}
           >
             <div className="relative z-10 py-2 lg:pr-5">
