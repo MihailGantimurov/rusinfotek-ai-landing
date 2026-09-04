@@ -12,10 +12,12 @@ import {
 } from '@/components/home/HomeSections';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { ScrollProgress } from '@/components/shared/ScrollProgress';
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+    <main className="min-h-screen overflow-x-clip bg-background text-foreground">
+      <ScrollProgress />
       <Header />
       <Hero />
       <TrustStrip />

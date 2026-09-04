@@ -19,15 +19,35 @@ export function MediaFrame({
   palette = 'from-[#142d51] via-[#485c96] to-[#9ca6ca]',
 }: MediaFrameProps) {
   return (
-    <figure className={`relative isolate overflow-hidden bg-linear-to-br ${palette} ${className}`}>
+    <figure
+      className={`relative isolate overflow-hidden bg-linear-to-br ${palette} ${className}`}
+    >
       {asset?.kind === 'image' ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img className="absolute inset-0 size-full object-cover" src={asset.src} alt={asset.alt} />
+        <img
+          className="absolute inset-0 size-full object-cover"
+          src={asset.src}
+          alt={asset.alt}
+        />
       ) : null}
       {asset?.kind === 'video' ? (
-        <video className="absolute inset-0 size-full object-cover" src={asset.src} poster={asset.poster} aria-label={asset.title} muted playsInline />
+        <video
+          className="absolute inset-0 size-full object-cover"
+          src={asset.src}
+          poster={asset.poster}
+          aria-label={asset.title}
+          muted
+          playsInline
+        />
       ) : null}
       {asset?.kind === 'content' ? asset.node : null}
+
+      {asset?.kind === 'image' ? (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-t from-[#061426]/68 via-transparent to-transparent"
+        />
+      ) : null}
 
       {!asset ? (
         <div aria-hidden="true" className="absolute inset-0">
@@ -38,7 +58,7 @@ export function MediaFrame({
         </div>
       ) : null}
 
-      <figcaption className="absolute bottom-5 left-5 right-5 z-10 border-t border-white/16 pt-3 text-[12px] leading-relaxed text-white/62">
+      <figcaption className="absolute bottom-4 left-4 right-4 z-10 rounded-[10px] border border-white/12 bg-[#07172a]/66 px-3 py-2 text-[10px] leading-relaxed tracking-[0.04em] text-white/72 backdrop-blur-md sm:bottom-5 sm:left-5 sm:right-5">
         {label}
       </figcaption>
     </figure>
