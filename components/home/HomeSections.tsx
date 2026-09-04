@@ -9,9 +9,9 @@ import {
   ServerCog,
   ShieldCheck,
 } from 'lucide-react';
-import Link from 'next/link';
 
 import { BrandButton } from '@/components/shared/BrandButton';
+import { HardLink } from '@/components/shared/HardLink';
 import { MediaFrame } from '@/components/shared/MediaFrame';
 import { Reveal } from '@/components/shared/Reveal';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -346,12 +346,12 @@ export function CasesSection() {
               Три задачи. Три работающих контура.
             </h2>
           </div>
-          <Link
+          <HardLink
             className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#17385f]"
             href="/cases"
           >
             Все кейсы <ArrowUpRight className="size-4" />
-          </Link>
+          </HardLink>
         </Reveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:gap-6">
@@ -410,12 +410,12 @@ export function CasesSection() {
                       </li>
                     ))}
                   </ul>
-                  <Link
+                  <HardLink
                     className="mt-7 inline-flex items-center gap-2 text-[14px] font-semibold text-[#17385f]"
                     href="/cases"
                   >
                     Коротко о проекте <ArrowUpRight className="size-4" />
-                  </Link>
+                  </HardLink>
                 </div>
               </article>
             </Reveal>
@@ -457,12 +457,12 @@ export function SecuritySection() {
             Архитектуру выбираем под инфраструктуру клиента и применимые
             требования 152-ФЗ.
           </p>
-          <Link
+          <HardLink
             className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-[#17385f]"
             href="/security"
           >
             Подробнее о подходе <ArrowUpRight className="size-4" />
-          </Link>
+          </HardLink>
         </div>
         <div className="divide-y divide-[#10233b]/10 border-y border-[#10233b]/10">
           {items.map(([Icon, title, text]) => (
@@ -641,17 +641,17 @@ export function InsightsSection() {
               Разбираем AI на языке процессов
             </h2>
           </div>
-          <Link
+          <HardLink
             className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#17385f]"
             href="/blog"
           >
             Все материалы <ArrowUpRight className="size-4" />
-          </Link>
+          </HardLink>
         </Reveal>
         <div className="mt-12 grid gap-4 lg:grid-cols-3">
           {articles.map((article, index) => (
             <Reveal delay={index * 0.05} key={article.title}>
-              <Link
+              <HardLink
                 className="group flex min-h-72 flex-col justify-between rounded-[22px] border border-[#10233b]/9 bg-[#f7f7f5] p-6 transition-[transform,box-shadow] hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(16,35,59,.07)] sm:p-7"
                 href="/blog"
               >
@@ -672,7 +672,7 @@ export function InsightsSection() {
                     <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
                 </div>
-              </Link>
+              </HardLink>
             </Reveal>
           ))}
         </div>

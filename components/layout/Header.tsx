@@ -1,12 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Logo } from '@/components/layout/Logo';
+import { HardLink } from '@/components/shared/HardLink';
 
 const navigation = [
   { label: 'Решения', href: '/solutions/sales' },
@@ -37,26 +42,31 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-[82px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16">
-        <Link href="/" aria-label="РусИнфоТек — главная">
+        <HardLink href="/" aria-label="РусИнфоТек — главная">
           <Logo inverse={darkMode} />
-        </Link>
+        </HardLink>
 
-        <nav className="hidden items-center gap-7 xl:gap-9 lg:flex" aria-label="Основная навигация">
+        <nav
+          className="hidden items-center gap-7 xl:gap-9 lg:flex"
+          aria-label="Основная навигация"
+        >
           {navigation.map((item) => (
-            <Link
+            <HardLink
               className={`text-[14px] font-medium transition-colors ${
-                darkMode ? 'text-white/72 hover:text-white' : 'text-oxford/70 hover:text-oxford'
+                darkMode
+                  ? 'text-white/72 hover:text-white'
+                  : 'text-oxford/70 hover:text-oxford'
               }`}
               href={item.href}
               key={item.href}
             >
               {item.label}
-            </Link>
+            </HardLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
+          <HardLink
             className={`group hidden min-h-12 items-stretch overflow-hidden rounded-[13px] border text-[14px] font-semibold transition-all sm:inline-flex ${
               darkMode
                 ? 'border-white/65 bg-white text-[#0b1c32] hover:bg-white/92'
@@ -64,9 +74,13 @@ export function Header() {
             }`}
             href="/contacts"
           >
-            <span className="flex items-center px-4 xl:px-5">Получить коммерческое предложение</span>
-            <span className="grid min-w-11 place-items-center border-l border-current/12 bg-white/[0.06]"><ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
-          </Link>
+            <span className="flex items-center px-4 xl:px-5">
+              Получить коммерческое предложение
+            </span>
+            <span className="grid min-w-11 place-items-center border-l border-current/12 bg-white/[0.06]">
+              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </span>
+          </HardLink>
           <button
             aria-expanded={open}
             aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
@@ -93,22 +107,22 @@ export function Header() {
           >
             <div className="flex flex-col py-3">
               {navigation.map((item) => (
-                <Link
+                <HardLink
                   className="py-4 text-lg font-medium text-oxford"
                   href={item.href}
                   key={item.href}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
-                </Link>
+                </HardLink>
               ))}
-              <Link
+              <HardLink
                 className="mt-3 inline-flex min-h-12 items-center justify-center rounded-[13px] bg-[linear-gradient(135deg,#17385f,#0e294b)] px-5 text-center text-sm font-semibold text-white"
                 href="/contacts"
                 onClick={() => setOpen(false)}
               >
                 Получить коммерческое предложение
-              </Link>
+              </HardLink>
             </div>
           </motion.nav>
         )}
