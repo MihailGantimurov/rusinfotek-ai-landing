@@ -3,10 +3,7 @@
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
 } from 'framer-motion';
-import { useRef } from 'react';
 
 import { HeroSystemMap } from '@/components/home/HeroSystemMap';
 import { BrandButton } from '@/components/shared/BrandButton';
@@ -14,37 +11,16 @@ import { BrandButton } from '@/components/shared/BrandButton';
 const directions = ['Продажи', 'Логистика', 'Производство', 'Документооборот'];
 
 export function Hero() {
-  const rootRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: rootRef,
-    offset: ['start start', 'end start'],
-  });
-  const copyY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, reduceMotion ? 0 : 72],
-  );
-  const mediaY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, reduceMotion ? 0 : 132],
-  );
-  const mediaScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [1, reduceMotion ? 1 : 0.93],
-  );
 
   return (
     <section
-      ref={rootRef}
       id="top"
-      className="hero-shell relative isolate overflow-hidden bg-[#07172a] px-4 pb-28 pt-24 text-white sm:px-7 sm:pb-36 sm:pt-28 lg:min-h-[100svh] lg:px-10 lg:pb-44 lg:pt-32 xl:px-16"
+      className="hero-shell relative isolate overflow-hidden bg-[#07172a] px-4 pb-28 pt-24 text-white sm:px-7 sm:pb-36 sm:pt-28 lg:min-h-[100svh] lg:px-10 lg:pb-40 lg:pt-32 xl:px-16"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_76%_19%,rgba(94,91,188,.23),transparent_30%),radial-gradient(circle_at_20%_72%,rgba(20,112,134,.18),transparent_31%),linear-gradient(135deg,#061426_0%,#0b2341_48%,#07182c_100%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(91,112,199,.2),transparent_32%),linear-gradient(135deg,#061426_0%,#0b2341_52%,#07182c_100%)]"
       />
       <div
         aria-hidden="true"
@@ -54,44 +30,30 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-[1440px] min-w-0 items-center gap-12 lg:grid-cols-[1.14fr_.86fr] lg:gap-10 xl:grid-cols-[1.08fr_.92fr] xl:gap-16">
         <motion.div
           className="relative z-10 min-w-0 pt-3 lg:pt-0"
-          style={{ y: copyY }}
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.72, ease: [0.22, 0.72, 0.24, 1] }}
         >
-          <motion.p
+          <p
             className="text-[12px] font-semibold tracking-[0.11em] text-[#aebeff]"
-            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.68, delay: 0.08 }}
           >
             AI-АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ
-          </motion.p>
+          </p>
 
           <motion.h1
             className="mt-5 max-w-full text-balance text-[clamp(2.25rem,9.4vw,3.5rem)] font-[560] leading-[.98] tracking-[-0.052em] sm:text-[clamp(2.65rem,6vw,4.4rem)] lg:max-w-[800px] lg:text-[clamp(3.25rem,5vw,5.25rem)] lg:tracking-[-0.058em]"
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.82,
-              delay: 0.16,
-              ease: [0.22, 0.72, 0.24, 1],
-            }}
           >
             Реализуем комплексный подход к автоматизации бизнеса
           </motion.h1>
 
-          <motion.p
+          <p
             className="mt-6 max-w-[620px] text-[17px] leading-[1.7] text-white/68 sm:text-[18px]"
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.72, delay: 0.28 }}
           >
             Умножаем эффективность, сокращаем издержки
-          </motion.p>
+          </p>
 
-          <motion.div
+          <div
             className="mt-8 flex flex-col gap-3 sm:flex-row"
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.68, delay: 0.38 }}
           >
             <BrandButton
               className="w-full sm:w-auto"
@@ -107,14 +69,11 @@ export function Hero() {
             >
               Каталог
             </BrandButton>
-          </motion.div>
+          </div>
 
-          <motion.nav
+          <nav
             aria-label="Направления автоматизации"
             className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/12 pt-5"
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={reduceMotion ? undefined : { opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.48 }}
           >
             {directions.map((direction, index) => (
               <a
@@ -128,16 +87,18 @@ export function Hero() {
                 {direction}
               </a>
             ))}
-          </motion.nav>
+          </nav>
         </motion.div>
 
         <motion.div
           className="relative min-w-0 lg:-mr-10 xl:-mr-16"
-          style={{ y: mediaY, scale: mediaScale }}
+          initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+          animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+          transition={{ duration: 0.84, delay: 0.12, ease: [0.22, 0.72, 0.24, 1] }}
         >
           <div
             aria-hidden="true"
-            className="absolute -inset-8 bg-[radial-gradient(circle,rgba(78,103,204,.26),transparent_68%)] blur-3xl"
+            className="absolute -inset-8 bg-[radial-gradient(circle,rgba(78,103,204,.18),transparent_68%)]"
           />
           <HeroSystemMap />
         </motion.div>

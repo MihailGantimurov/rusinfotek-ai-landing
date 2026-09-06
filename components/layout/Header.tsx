@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AnimatePresence,
   motion,
-  useMotionValueEvent,
-  useScroll,
 } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -24,21 +22,23 @@ const navigation = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
   const pathname = usePathname();
   const onHero = pathname === '/' && !scrolled;
   const darkMode = onHero && !open;
 
-  useMotionValueEvent(scrollY, 'change', (value) => {
-    setScrolled(value > 30);
-  });
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 30);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         onHero && !open
           ? 'bg-transparent'
-          : 'border-b border-oxford/8 bg-[#f7f7f5]/88 shadow-[0_12px_44px_rgba(7,23,42,.055)] backdrop-blur-xl'
+          : 'border-b border-oxford/8 bg-[#f7f7f5]/96 shadow-[0_12px_32px_rgba(7,23,42,.045)]'
       }`}
     >
       <div className="mx-auto flex h-[82px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16">

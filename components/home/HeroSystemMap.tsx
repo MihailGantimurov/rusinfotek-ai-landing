@@ -62,15 +62,9 @@ export function HeroSystemMap() {
         aria-hidden="true"
         className="absolute left-1/2 top-[47%] size-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#8ea3f4]/12 bg-[#5871cc]/8 blur-[1px]"
       />
-      <motion.div
+      <div
         aria-hidden="true"
-        animate={
-          reduceMotion
-            ? undefined
-            : { opacity: [0.2, 0.62, 0.2], scale: [0.86, 1.08, 0.86] }
-        }
-        className="absolute left-1/2 top-[47%] size-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#536fd8]/18 blur-3xl"
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute left-1/2 top-[47%] size-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(83,111,216,.24),transparent_68%)]"
       />
 
       <div className="absolute inset-x-5 top-5 flex items-center justify-between sm:inset-x-7 sm:top-7">
@@ -79,12 +73,7 @@ export function HeroSystemMap() {
           RIT / OPERATING SYSTEM
         </span>
         <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3 py-2 text-[9px] font-semibold tracking-[0.09em] text-white/68 backdrop-blur-md">
-          <motion.span
-            aria-hidden="true"
-            animate={reduceMotion ? undefined : { opacity: [0.35, 1, 0.35] }}
-            className="size-1.5 rounded-full bg-[#00e8d1] shadow-[0_0_12px_rgba(0,232,209,.85)]"
-            transition={{ duration: 1.8, repeat: Infinity }}
-          />
+          <span aria-hidden="true" className="status-dot size-1.5 rounded-full bg-[#00e8d1] shadow-[0_0_12px_rgba(0,232,209,.65)]" />
           КОНТУР АКТИВЕН
         </span>
       </div>
@@ -93,7 +82,7 @@ export function HeroSystemMap() {
         const Icon = node.icon;
         return (
           <motion.div
-            className={`absolute z-10 w-[40%] rounded-[16px] border border-white/12 bg-[#0d2948]/78 p-3.5 backdrop-blur-xl sm:w-[37%] sm:p-4 ${node.position}`}
+            className={`absolute z-10 w-[40%] rounded-[16px] border border-white/12 bg-[#0d2948]/95 p-3.5 sm:w-[37%] sm:p-4 ${node.position}`}
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.44 + node.delay * 0.1 }}
@@ -118,8 +107,6 @@ export function HeroSystemMap() {
 
       <motion.div
         className="absolute left-1/2 top-[47%] z-20 flex size-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#9db0ff]/24 bg-[radial-gradient(circle_at_34%_28%,rgba(114,142,232,.34),rgba(9,32,58,.96)_66%)] text-center shadow-[0_0_80px_rgba(86,111,208,.28)] sm:size-40"
-        animate={reduceMotion ? undefined : { rotate: [0, 1.4, 0, -1.4, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       >
         <span className="grid size-10 place-items-center rounded-full border border-white/13 bg-white/[0.07] text-[#aebeff] sm:size-12">
           <Boxes className="size-5 sm:size-6" />
@@ -129,7 +116,7 @@ export function HeroSystemMap() {
         </strong>
       </motion.div>
 
-      <div className="absolute inset-x-5 bottom-5 z-30 flex min-h-[72px] items-center justify-between rounded-[15px] border border-white/10 bg-[#07182b]/88 px-4 py-3 backdrop-blur-xl sm:inset-x-7 sm:px-5">
+      <div className="absolute inset-x-5 bottom-5 z-30 flex min-h-[72px] items-center justify-between rounded-[15px] border border-white/10 bg-[#07182b]/96 px-4 py-3 sm:inset-x-7 sm:px-5">
         <div>
           <p className="font-mono text-[8px] tracking-[0.13em] text-[#9fb2ff] sm:text-[9px]">
             СИСТЕМНЫЙ ЭФФЕКТ
@@ -139,22 +126,11 @@ export function HeroSystemMap() {
           </p>
         </div>
         <div className="hidden items-end gap-1 sm:flex" aria-hidden="true">
-          {[12, 18, 25, 20, 32, 39, 48].map((height, index) => (
-            <motion.span
-              animate={
-                reduceMotion
-                  ? undefined
-                  : { height: [height, height * 0.72, height] }
-              }
+          {[12, 18, 25, 20, 32, 39, 48].map((height) => (
+            <span
               className="w-1 rounded-full bg-linear-to-t from-[#4a62bc] to-[#32d8c9]"
               key={height}
               style={{ height }}
-              transition={{
-                duration: 2.1,
-                delay: index * 0.12,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
             />
           ))}
         </div>

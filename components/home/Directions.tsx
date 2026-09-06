@@ -3,12 +3,10 @@
 import {
   AnimatePresence,
   motion,
-  useMotionValueEvent,
   useReducedMotion,
-  useScroll,
 } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { BrandButton } from '@/components/shared/BrandButton';
 import { DirectionScene } from '@/components/home/DirectionScene';
@@ -30,47 +28,17 @@ const atmospheres = {
 };
 
 export function Directions() {
-  const rootRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [travelDirection, setTravelDirection] = useState(1);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: rootRef,
-    offset: ['start start', 'end end'],
-  });
-
-  useMotionValueEvent(scrollYProgress, 'change', (value) => {
-    if (typeof window === 'undefined' || window.innerWidth < 1024) return;
-    const next = Math.min(
-      directions.length - 1,
-      Math.floor(value * directions.length),
-    );
-    setActiveIndex((current) => {
-      if (current !== next) setTravelDirection(next > current ? 1 : -1);
-      return next;
-    });
-  });
 
   const direction = directions[activeIndex] ?? directions[0];
   const atmosphere = atmospheres[direction.visual];
 
-  function selectDirection(index: number, updateScroll = true) {
+  function selectDirection(index: number) {
     const next = (index + directions.length) % directions.length;
     setTravelDirection(next > activeIndex ? 1 : -1);
     setActiveIndex(next);
-
-    if (
-      updateScroll &&
-      rootRef.current &&
-      window.matchMedia('(min-width: 1024px)').matches
-    ) {
-      const top = rootRef.current.getBoundingClientRect().top + window.scrollY;
-      const range = rootRef.current.offsetHeight - window.innerHeight;
-      window.scrollTo({
-        top: top + range * ((next + 0.12) / directions.length),
-        behavior: reduceMotion ? 'auto' : 'smooth',
-      });
-    }
   }
 
   function handleTabKey(
@@ -94,11 +62,10 @@ export function Directions() {
 
   return (
     <section
-      ref={rootRef}
       id="directions"
-      className="relative scroll-mt-20 bg-[#eef0ee] px-5 pb-24 sm:px-8 sm:pb-28 lg:h-[360vh] lg:scroll-mt-0 lg:px-12 lg:pb-0 xl:px-16"
+      className="deferred-section relative scroll-mt-20 bg-[#eef0ee] px-5 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32 xl:px-16"
     >
-      <div className="directions-sticky mx-auto max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:overflow-hidden lg:py-10">
+      <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-8 lg:grid-cols-[.76fr_1.24fr] lg:items-end">
           <div>
             <p className="section-label">КАТАЛОГ</p>
@@ -191,10 +158,7 @@ export function Directions() {
             </div>
 
             <div className="relative">
-              <div
-                aria-hidden="true"
-                className={`absolute -inset-8 rounded-full blur-[90px] ${atmosphere.glow}`}
-              />
+              <div aria-hidden="true" className={`absolute -inset-5 rounded-[34px] opacity-50 ${atmosphere.glow}`} />
               <DirectionScene variant={direction.visual} />
             </div>
           </motion.article>
@@ -204,7 +168,7 @@ export function Directions() {
           <button
             aria-label="Предыдущее направление"
             className="grid size-11 place-items-center rounded-[12px] border border-[#10233b]/12 bg-white text-[#10233b]"
-            onClick={() => selectDirection(activeIndex - 1, false)}
+            onClick={() => selectDirection(activeIndex - 1)}
             type="button"
           >
             <ArrowLeft className="size-4" />
@@ -212,7 +176,7 @@ export function Directions() {
           <button
             aria-label="Следующее направление"
             className="grid size-11 place-items-center rounded-[12px] bg-[#17385f] text-white"
-            onClick={() => selectDirection(activeIndex + 1, false)}
+            onClick={() => selectDirection(activeIndex + 1)}
             type="button"
           >
             <ArrowRight className="size-4" />
