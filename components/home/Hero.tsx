@@ -8,7 +8,7 @@ import {
 } from 'framer-motion';
 import { useRef } from 'react';
 
-import { HeroMedia } from '@/components/home/HeroMedia';
+import { HeroSystemMap } from '@/components/home/HeroSystemMap';
 import { BrandButton } from '@/components/shared/BrandButton';
 
 const directions = ['Продажи', 'Логистика', 'Производство', 'Документооборот'];
@@ -75,7 +75,7 @@ export function Hero() {
               ease: [0.22, 0.72, 0.24, 1],
             }}
           >
-            Автоматизируем процессы, на которых держится бизнес.
+            Реализуем комплексный подход к автоматизации бизнеса
           </motion.h1>
 
           <motion.p
@@ -84,8 +84,7 @@ export function Hero() {
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.72, delay: 0.28 }}
           >
-            AI-системы для продаж, логистики, производства и документооборота.
-            Интегрируем решения в существующую инфраструктуру компании.
+            Умножаем эффективность, сокращаем издержки
           </motion.p>
 
           <motion.div
@@ -103,11 +102,10 @@ export function Hero() {
             </BrandButton>
             <BrandButton
               className="w-full sm:w-auto"
-              href="#directions"
-              direction="down"
+              href="/catalog"
               tone="quiet"
             >
-              Смотреть решения
+              Каталог
             </BrandButton>
           </motion.div>
 
@@ -121,7 +119,7 @@ export function Hero() {
             {directions.map((direction, index) => (
               <a
                 className="group inline-flex items-center gap-2 text-[13px] text-white/54 transition-colors hover:text-white"
-                href="#directions"
+                href={`/catalog#${['sales', 'logistics', 'production', 'documents'][index]}`}
                 key={direction}
               >
                 <span className="font-mono text-[10px] text-[#91a6ff]">
@@ -141,7 +139,7 @@ export function Hero() {
             aria-hidden="true"
             className="absolute -inset-8 bg-[radial-gradient(circle,rgba(78,103,204,.26),transparent_68%)] blur-3xl"
           />
-          <HeroMedia />
+          <HeroSystemMap />
         </motion.div>
       </div>
 

@@ -208,4 +208,17 @@ button {
   .direction-cta {
     margin-top: 1.25rem;
   }
+
+  .direction-scene {
+    padding: 1rem;
+  }
+
+  .direction-scene-header {
+    padding-bottom: 0.75rem;
+  }
+
+  .direction-scene-body {
+    padding-bottom: 0.75rem;
+    padding-top: 0.75rem;
+  }
 }

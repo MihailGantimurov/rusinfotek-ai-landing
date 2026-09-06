@@ -1,4 +1,8 @@
-export type DirectionVisual = 'sales' | 'logistics' | 'production' | 'documents';
+export type DirectionVisual =
+  | 'sales'
+  | 'logistics'
+  | 'production'
+  | 'documents';
 
 export type Direction = {
   number: string;
@@ -15,8 +19,9 @@ export const directions: Direction[] = [
   {
     number: '01',
     title: 'Продажи',
-    href: '/solutions/sales',
-    description: 'Согласованная работа с лидами, сделками и клиентскими коммуникациями.',
+    href: '/catalog#sales',
+    description:
+      'Согласованная работа с лидами, сделками и клиентскими коммуникациями.',
     modules: [
       'Приём и обработка лидов',
       'Формирование КП и договоров',
@@ -31,8 +36,9 @@ export const directions: Direction[] = [
   {
     number: '02',
     title: 'Логистика',
-    href: '/solutions/logistics',
-    description: 'Единая среда для заявок, перевозок, документов и управления операционным контуром.',
+    href: '/catalog#logistics',
+    description:
+      'Единая среда для заявок, перевозок, документов и управления операционным контуром.',
     modules: [
       'Приём и обработка заявок',
       'Расчёт стоимости и КП',
@@ -48,8 +54,9 @@ export const directions: Direction[] = [
   {
     number: '03',
     title: 'Производство',
-    href: '/solutions/production',
-    description: 'Цифровая поддержка расчётов и контроля процессов на производственной площадке.',
+    href: '/catalog#production',
+    description:
+      'Цифровая поддержка расчётов и контроля процессов на производственной площадке.',
     modules: [
       'Автоматизация проектных расчётов',
       'Мониторинг производственных процессов',
@@ -61,8 +68,9 @@ export const directions: Direction[] = [
   {
     number: '04',
     title: 'Документооборот',
-    href: '/solutions/documents',
-    description: 'Документы создаются и проверяются внутри общей логики корпоративных процессов.',
+    href: '/catalog#documents',
+    description:
+      'Документы создаются и проверяются внутри общей логики корпоративных процессов.',
     modules: ['Генерация и проверка документов'],
     visual: 'documents',
     layout: 'editorial',

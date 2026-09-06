@@ -3,12 +3,13 @@ import { HardLink } from '@/components/shared/HardLink';
 
 const columns = [
   {
-    title: 'Решения',
+    title: 'Каталог',
     links: [
-      ['Продажи', '/solutions/sales'],
-      ['Логистика', '/solutions/logistics'],
-      ['Производство', '/solutions/production'],
-      ['Документооборот', '/solutions/documents'],
+      ['Все решения', '/catalog'],
+      ['Продажи', '/catalog#sales'],
+      ['Логистика', '/catalog#logistics'],
+      ['Производство', '/catalog#production'],
+      ['Документооборот', '/catalog#documents'],
     ],
   },
   {

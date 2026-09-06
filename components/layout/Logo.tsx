@@ -4,15 +4,13 @@ type LogoProps = {
 
 export function Logo({ inverse = false }: LogoProps) {
   return (
-    <span className="inline-flex items-baseline gap-1.5" aria-label="РусИнфоТек">
-      <span
-        className={`text-[18px] font-semibold tracking-[-0.055em] ${
-          inverse ? 'text-white' : 'text-oxford'
-        }`}
-      >
-        РусИнфоТек
-      </span>
-      <span className={`text-[8px] font-bold tracking-[0.02em] ${inverse ? 'text-white/45' : 'text-oxford/38'}`} aria-hidden="true">TR</span>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      alt="РусИнфоТек"
+      className="h-[28px] w-auto sm:h-[30px]"
+      height="118"
+      src={inverse ? '/brand/logo-white.png' : '/brand/logo-black.png'}
+      width="874"
+    />
   );
 }

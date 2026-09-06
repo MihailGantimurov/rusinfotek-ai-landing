@@ -14,9 +14,9 @@ import { Logo } from '@/components/layout/Logo';
 import { HardLink } from '@/components/shared/HardLink';
 
 const navigation = [
-  { label: 'Решения', href: '/solutions/sales' },
+  { label: 'Каталог', href: '/catalog' },
   { label: 'Кейсы', href: '/cases' },
-  { label: 'Компания', href: '/company' },
+  { label: 'О компании', href: '/company' },
   { label: 'Безопасность', href: '/security' },
   { label: 'Блог и новости', href: '/blog' },
 ];
@@ -47,7 +47,7 @@ export function Header() {
         </HardLink>
 
         <nav
-          className="hidden items-center gap-7 xl:gap-9 lg:flex"
+          className="hidden items-center gap-7 xl:flex xl:gap-9"
           aria-label="Основная навигация"
         >
           {navigation.map((item) => (

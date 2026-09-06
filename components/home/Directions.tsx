@@ -101,9 +101,9 @@ export function Directions() {
       <div className="directions-sticky mx-auto max-w-[1440px] lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:overflow-hidden lg:py-10">
         <div className="grid gap-8 lg:grid-cols-[.76fr_1.24fr] lg:items-end">
           <div>
-            <p className="section-label">РЕШЕНИЯ</p>
+            <p className="section-label">КАТАЛОГ</p>
             <h2 className="mt-4 max-w-3xl text-[clamp(2.3rem,3.6vw,4.3rem)] font-[540] leading-[1.03] tracking-[-0.05em] text-[#10233b]">
-              AI для ключевых процессов компании
+              Ускорение ключевых процессов компании. Каталог решений
             </h2>
           </div>
           <p className="max-w-2xl text-[16px] leading-[1.7] text-[#10233b]/56 lg:justify-self-end lg:text-[17px]">

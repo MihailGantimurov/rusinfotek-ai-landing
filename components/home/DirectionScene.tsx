@@ -28,14 +28,14 @@ const sceneCopy = {
 
 function SalesScene() {
   return (
-    <div className="grid h-full gap-3 sm:grid-cols-3">
+    <div className="grid h-full min-h-0 gap-3 sm:grid-cols-3">
       {[
         ['01', 'Входящие', ['Сайт', 'Телефония', 'Мессенджеры']],
         ['02', 'AI-слой', ['Квалификация', 'Резюме', 'Следующий шаг']],
         ['03', 'CRM', ['Сделка', 'Задача', 'Контроль']],
       ].map(([number, title, items], index) => (
         <div
-          className="relative rounded-[16px] border border-white/12 bg-white/[0.065] p-4"
+          className="relative min-h-0 rounded-[16px] border border-white/12 bg-white/[0.065] p-4"
           key={title as string}
         >
           <div className="flex items-center justify-between">
@@ -48,10 +48,10 @@ function SalesScene() {
               <Check className="size-3.5 text-[#9ce8dc]" />
             )}
           </div>
-          <p className="mt-7 text-[15px] font-semibold text-white">
+          <p className="mt-4 text-[15px] font-semibold text-white xl:mt-5">
             {title as string}
           </p>
-          <div className="mt-4 space-y-2">
+          <div className="mt-3 space-y-2">
             {(items as string[]).map((item) => (
               <div
                 className="rounded-[9px] border border-white/8 bg-[#061529]/34 px-3 py-2 text-[11px] text-white/58"
@@ -69,7 +69,7 @@ function SalesScene() {
 
 function LogisticsScene() {
   return (
-    <div className="flex h-full flex-col justify-between rounded-[18px] border border-white/11 bg-[#07192d]/28 p-5 sm:p-6">
+    <div className="flex h-full min-h-0 flex-col justify-between rounded-[18px] border border-white/11 bg-[#07192d]/28 p-4 xl:p-5">
       <div className="flex items-center justify-between">
         <span className="font-mono text-[10px] tracking-[0.1em] text-white/42">
           МАРШРУТ ЗАЯВКИ
@@ -79,7 +79,7 @@ function LogisticsScene() {
           КОНТРОЛЕМ
         </span>
       </div>
-      <div className="relative my-8 grid gap-5 sm:grid-cols-3 sm:gap-8">
+      <div className="relative my-4 grid gap-5 sm:grid-cols-3 sm:gap-8 xl:my-6">
         <div className="absolute left-[12%] right-[12%] top-6 hidden h-px bg-linear-to-r from-white/12 via-[#91a7ff]/70 to-white/12 sm:block" />
         {[
           [CircleDot, 'Заявка', 'Сайт · почта · чат'],
@@ -92,7 +92,7 @@ function LogisticsScene() {
               <span className="relative z-10 mx-auto grid size-12 place-items-center rounded-full border border-white/15 bg-[#173a5b] text-[#aebeff] shadow-[0_0_30px_rgba(100,132,210,.2)]">
                 <SceneIcon className="size-4" />
               </span>
-              <p className="mt-4 text-[14px] font-semibold text-white">
+              <p className="mt-2 text-[14px] font-semibold text-white xl:mt-4">
                 {title as string}
               </p>
               <p className="mt-1 text-[11px] text-white/42">{text as string}</p>
@@ -103,7 +103,7 @@ function LogisticsScene() {
       <div className="grid grid-cols-3 gap-2">
         {['Проверка данных', 'Назначение', 'Синхронизация'].map((item) => (
           <div
-            className="rounded-[10px] bg-white/[0.06] px-3 py-3 text-center text-[10px] text-white/52"
+            className="rounded-[10px] bg-white/[0.06] px-3 py-2 text-center text-[10px] text-white/52"
             key={item}
           >
             {item}
@@ -116,12 +116,12 @@ function LogisticsScene() {
 
 function ProductionScene() {
   return (
-    <div className="grid h-full gap-3 sm:grid-cols-[1.15fr_.85fr]">
-      <div className="rounded-[18px] border border-white/11 bg-[#081725]/34 p-5">
+    <div className="grid h-full min-h-0 gap-3 sm:grid-cols-[1.15fr_.85fr]">
+      <div className="min-h-0 rounded-[18px] border border-white/11 bg-[#081725]/34 p-4 xl:p-5">
         <p className="font-mono text-[10px] tracking-[0.1em] text-white/42">
           ОПЕРАЦИОННЫЙ КОНТУР
         </p>
-        <div className="mt-7 space-y-5">
+        <div className="mt-4 space-y-3 xl:mt-5 xl:space-y-4">
           {[
             ['Проектный расчёт', 'ГОТОВО', 'w-[88%]'],
             ['Производственный этап', 'В РАБОТЕ', 'w-[66%]'],
@@ -143,19 +143,19 @@ function ProductionScene() {
           ))}
         </div>
       </div>
-      <div className="grid grid-rows-2 gap-3">
-        <div className="rounded-[18px] border border-white/11 bg-white/[0.07] p-5">
+      <div className="grid min-h-0 grid-rows-[repeat(2,minmax(0,1fr))] gap-3">
+        <div className="min-h-0 rounded-[18px] border border-white/11 bg-white/[0.07] p-4 xl:p-5">
           <p className="font-mono text-[9px] text-white/38">СИГНАЛ</p>
-          <p className="mt-4 text-[24px] font-[540] tracking-[-0.04em] text-white">
+          <p className="mt-2 text-[24px] font-[540] tracking-[-0.04em] text-white xl:mt-3">
             Стабильно
           </p>
           <p className="mt-1 text-[11px] text-white/42">
             Критичных отклонений нет
           </p>
         </div>
-        <div className="rounded-[18px] border border-white/11 bg-white/[0.07] p-5">
+        <div className="min-h-0 rounded-[18px] border border-white/11 bg-white/[0.07] p-4 xl:p-5">
           <p className="font-mono text-[9px] text-white/38">СВЯЗЬ</p>
-          <p className="mt-4 text-[24px] font-[540] tracking-[-0.04em] text-white">
+          <p className="mt-2 text-[24px] font-[540] tracking-[-0.04em] text-white xl:mt-3">
             ERP / 1С
           </p>
           <p className="mt-1 text-[11px] text-white/42">
@@ -169,8 +169,8 @@ function ProductionScene() {
 
 function DocumentsScene() {
   return (
-    <div className="grid h-full gap-4 sm:grid-cols-[.9fr_1.1fr]">
-      <div className="relative min-h-56">
+    <div className="grid h-full min-h-0 gap-4 sm:grid-cols-[.9fr_1.1fr]">
+      <div className="relative min-h-56 sm:min-h-0">
         {['Акт', 'Договор', 'Коммерческое предложение'].map((title, index) => (
           <div
             className="absolute inset-x-0 rounded-[16px] border border-white/13 bg-[#f4f5f3] p-5 text-[#10233b] shadow-[0_22px_46px_rgba(2,12,30,.2)]"
@@ -191,11 +191,11 @@ function DocumentsScene() {
           </div>
         ))}
       </div>
-      <div className="rounded-[18px] border border-white/11 bg-[#08182c]/34 p-5">
+      <div className="min-h-0 rounded-[18px] border border-white/11 bg-[#08182c]/34 p-4 xl:p-5">
         <p className="font-mono text-[10px] tracking-[0.1em] text-white/42">
           АВТОПРОВЕРКА
         </p>
-        <div className="mt-6 space-y-3">
+        <div className="mt-4 space-y-2">
           {[
             'Реквизиты заполнены',
             'Условия согласованы',
@@ -203,7 +203,7 @@ function DocumentsScene() {
             'Версия зафиксирована',
           ].map((item) => (
             <div
-              className="flex items-center gap-3 rounded-[11px] bg-white/[0.065] px-3 py-3 text-[11px] text-white/62"
+              className="flex items-center gap-3 rounded-[11px] bg-white/[0.065] px-3 py-2 text-[11px] text-white/62"
               key={item}
             >
               <span className="grid size-5 place-items-center rounded-full bg-[#71c9be]/16 text-[#9ce8dc]">
@@ -222,8 +222,8 @@ export function DirectionScene({ variant }: DirectionSceneProps) {
   const [eyebrow, title] = sceneCopy[variant];
 
   return (
-    <figure className="relative flex min-h-[410px] flex-col overflow-hidden rounded-[26px] border border-white/12 bg-[radial-gradient(circle_at_85%_8%,rgba(114,133,224,.32),transparent_34%),linear-gradient(145deg,#0a1d35,#173c61_58%,#152747)] p-4 shadow-[0_34px_84px_rgba(13,32,55,.2)] sm:min-h-[500px] sm:p-6 lg:h-[44vh] lg:min-h-[340px] lg:max-h-[500px]">
-      <div className="flex items-start justify-between gap-5 border-b border-white/10 pb-4">
+    <figure className="direction-scene relative flex min-h-[410px] flex-col overflow-hidden rounded-[26px] border border-white/12 bg-[radial-gradient(circle_at_85%_8%,rgba(114,133,224,.32),transparent_34%),linear-gradient(145deg,#0a1d35,#173c61_58%,#152747)] p-4 shadow-[0_34px_84px_rgba(13,32,55,.2)] sm:min-h-[500px] sm:p-6 lg:h-[clamp(430px,48vh,500px)] lg:min-h-[430px] lg:max-h-[500px]">
+      <div className="direction-scene-header flex shrink-0 items-start justify-between gap-5 border-b border-white/10 pb-4">
         <div>
           <p className="font-mono text-[9px] tracking-[0.12em] text-[#aebeff]">
             {eyebrow}
@@ -237,15 +237,11 @@ export function DirectionScene({ variant }: DirectionSceneProps) {
           LIVE LOGIC
         </span>
       </div>
-      <div className="min-h-0 flex-1 py-5 sm:py-6">
+      <div className="direction-scene-body min-h-0 flex-1 py-5 sm:py-6">
         {variant === 'sales' ? <SalesScene /> : null}
         {variant === 'logistics' ? <LogisticsScene /> : null}
         {variant === 'production' ? <ProductionScene /> : null}
         {variant === 'documents' ? <DocumentsScene /> : null}
-      </div>
-      <div className="flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[9px] tracking-[0.08em] text-white/34">
-        <span>ДЕМОНСТРАЦИЯ ЛОГИКИ</span>
-        <span>RIT / SYSTEM VIEW</span>
       </div>
     </figure>
   );
