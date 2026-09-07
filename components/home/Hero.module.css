@@ -11,14 +11,15 @@
 }
 .media, .video, .shade { position: absolute; inset: 0; width: 100%; height: 100%; }
 .media { z-index: -3; }
-.video { object-fit: cover; object-position: 60% center; }
+.video { opacity: 0; object-fit: cover; object-position: 60% center; transition: opacity 1.05s linear; will-change: opacity; }
+.video[data-visible='true'] { opacity: 1; }
 .shade {
   z-index: -2;
   background: linear-gradient(90deg, rgba(7,23,42,.88) 0%, rgba(7,23,42,.72) 37%, rgba(7,23,42,.35) 65%, rgba(7,23,42,.12) 100%), linear-gradient(180deg, rgba(7,23,42,.4), transparent 25%, transparent 72%, rgba(7,23,42,.65));
 }
 .copy { width: 100%; position: relative; z-index: 1; pointer-events: none; }
 .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .13em; color: #aebeff; }
-.heading { margin: 27px 0 0; font-size: clamp(64px, 6.25vw, 105px); font-weight: 500; line-height: .97; letter-spacing: -.025em; }
+.heading { margin: 27px 0 0; font-size: clamp(64px, 5.15vw, 80px); font-weight: 400; line-height: .98; letter-spacing: -.025em; }
 .lineMask { display: block; overflow: hidden; padding-bottom: .13em; margin-bottom: -.13em; }
 .line { display: block; width: fit-content; }
 .subtitle { max-width: 600px; margin-top: 30px; font-size: 18px; line-height: 1.65; color: rgba(255,255,255,.73); }
@@ -48,7 +49,7 @@
 .playback { display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; color: rgba(255,255,255,.7); background: transparent; border: 0; }
 @media (max-width: 767px) {
   .hero { padding: 120px 24px 160px; }
-  .heading { font-size: clamp(36px, 11.8vw, 58px); line-height: .98; letter-spacing: -.025em; }
+  .heading { font-size: clamp(36px, 11.2vw, 58px); font-weight: 400; line-height: .98; letter-spacing: -.025em; }
   .line:last-child { max-width: 12em; }
   .eyebrow { max-width: 310px; font-size: 9px; line-height: 1.6; letter-spacing: .1em; }
   .subtitle { max-width: 480px; margin-top: 25px; font-size: 17px; line-height: 1.55; }
@@ -64,5 +65,3 @@
   .signal { animation: none; }
   .primary:hover svg, .secondary:hover svg { transform: none; }
 }
-
-
