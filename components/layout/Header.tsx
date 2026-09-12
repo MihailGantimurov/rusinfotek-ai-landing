@@ -82,10 +82,13 @@ export function Header() {
             </span>
           </HardLink>
           <button
+            aria-controls="mobile-navigation"
             aria-expanded={open}
             aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
-            className={`grid size-11 place-items-center rounded-full transition-colors lg:hidden ${
-              darkMode ? 'bg-white/12 text-white' : 'bg-oxford/6 text-oxford'
+            className={`grid size-11 shrink-0 place-items-center rounded-full border transition-colors xl:hidden ${
+              darkMode
+                ? 'border-white/20 bg-white/12 text-white hover:bg-white/18'
+                : 'border-oxford/10 bg-oxford/6 text-oxford hover:bg-oxford/10'
             }`}
             onClick={() => setOpen((value) => !value)}
             type="button"
@@ -99,7 +102,8 @@ export function Header() {
         {open && (
           <motion.nav
             aria-label="Мобильная навигация"
-            className="overflow-hidden bg-[#fbfbfa] px-5 sm:px-8 lg:hidden"
+            className="overflow-hidden bg-[#fbfbfa] px-5 sm:px-8 xl:hidden"
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

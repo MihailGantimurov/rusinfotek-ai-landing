@@ -95,6 +95,13 @@ html {
   background: var(--background);
 }
 
+html:has(#sales:target),
+html:has(#logistics:target),
+html:has(#production:target),
+html:has(#documents:target) {
+  scroll-behavior: auto;
+}
+
 body {
   margin: 0;
   background: var(--background);
@@ -204,6 +211,17 @@ button {
   [class*='backdrop-blur'] {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  main .grid > * {
+    min-width: 0;
+  }
+
+  main :where(h1, h2, h3, p, li) {
+    hyphens: auto;
+    overflow-wrap: anywhere;
   }
 }
 

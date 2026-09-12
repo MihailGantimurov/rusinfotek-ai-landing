@@ -3,10 +3,10 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, Pause, Play } from 'lucide-react';
 import { IBM_Plex_Sans } from 'next/font/google';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-import { HeroDataFlow } from './HeroDataFlow';
+import { HardLink } from '@/components/shared/HardLink';
+
 import styles from './Hero.module.css';
 
 const display = IBM_Plex_Sans({
@@ -34,7 +34,6 @@ export function Hero() {
   const copyY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -36]);
   const copyOpacity = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 0.88]);
   const mediaScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 1.025]);
-  const flowY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -16]);
 
   useEffect(() => {
     const videoA = videoARef.current;
@@ -217,14 +216,11 @@ export function Hero() {
         <video ref={videoARef} className={styles.video} data-visible="true" autoPlay muted playsInline preload="auto" tabIndex={-1}>
           <source src="/media/hero/hero-cinematic.mp4" type="video/mp4" />
         </video>
-        <video ref={videoBRef} className={styles.video} data-visible="false" autoPlay muted playsInline preload="auto" tabIndex={-1}>
+        <video ref={videoBRef} className={styles.video} data-visible="false" muted playsInline preload="none" tabIndex={-1}>
           <source src="/media/hero/hero-cinematic.mp4" type="video/mp4" />
         </video>
       </motion.div>
       <div aria-hidden="true" className={styles.shade} />
-      <motion.div className={styles.flow} style={{ y: flowY }} {...reveal(2)}>
-        <HeroDataFlow paused={!!reduceMotion || paused} />
-      </motion.div>
       <motion.div className={styles.copy} style={{ y: copyY, opacity: copyOpacity }}>
         <motion.p className={styles.eyebrow} {...reveal(0.3)}>AI-АВТОМАТИЗАЦИЯ БИЗНЕС-ПРОЦЕССОВ</motion.p>
         <h1 id="hero-title" className={`${display.className} ${styles.heading}`}>
@@ -238,7 +234,7 @@ export function Hero() {
         <motion.p className={styles.subtitle} {...reveal(1.2)}>Создаём AI-инфраструктуру, которая объединяет ключевые процессы бизнеса в единый цифровой контур.</motion.p>
         <div className={styles.actions}>
           <motion.div {...reveal(1.6)}>
-            <Link className={styles.primary} href="/contacts"><span>НАЧАТЬ РАБОТУ</span><span className={styles.arrowSegment}><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
+            <HardLink className={styles.primary} href="/contacts"><span>НАЧАТЬ РАБОТУ</span><span className={styles.arrowSegment}><ArrowUpRight size={20} aria-hidden="true" /></span></HardLink>
           </motion.div>
           <motion.div {...reveal(1.8)}>
             <a className={styles.secondary} href="#directions"><span>СМОТРЕТЬ РЕШЕНИЯ</span><ArrowDown size={15} aria-hidden="true" /></a>
