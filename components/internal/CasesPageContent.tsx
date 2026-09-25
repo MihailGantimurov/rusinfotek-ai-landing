@@ -123,11 +123,11 @@ export function CasesPageContent() {
                 key={item.client}
               >
                 <Reveal
-                  className={`grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12 ${index % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}
+                  className={`grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-stretch lg:gap-12 lg:[&>*]:min-w-0 ${index % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}
                 >
                   <MediaFrame
                     asset={{ kind: 'image', src: item.image, alt: item.alt }}
-                    className="aspect-[1.22/1] min-h-[410px] rounded-[26px]"
+                    className="h-[410px] w-full min-w-0 rounded-[26px] sm:h-auto sm:min-h-[410px] sm:aspect-[1.22/1]"
                     label={item.label}
                   />
                   <div className="flex flex-col justify-between py-1 lg:py-6">

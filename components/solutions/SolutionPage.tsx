@@ -221,7 +221,7 @@ export function SolutionPage({ content }: SolutionPageProps) {
       </section>
 
       <section className="bg-[#eef0ee] px-5 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-36 xl:px-16">
-        <div className="mx-auto grid max-w-[1440px] gap-6 lg:grid-cols-[1.08fr_.92fr]">
+        <div className="mx-auto grid min-w-0 max-w-[1440px] gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,.92fr)] lg:[&>*]:min-w-0">
           <Reveal>
             {content.proof.image ? (
               <MediaFrame
@@ -230,7 +230,7 @@ export function SolutionPage({ content }: SolutionPageProps) {
                   src: content.proof.image,
                   alt: content.proof.imageAlt ?? '',
                 }}
-                className="aspect-[1.25/1] min-h-[420px] rounded-[26px]"
+                className="h-[420px] w-full min-w-0 rounded-[26px] sm:h-auto sm:min-h-[420px] sm:aspect-[1.25/1]"
                 label="Реальный интерфейс · данные обезличены"
               />
             ) : (
