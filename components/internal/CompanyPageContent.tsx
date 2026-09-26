@@ -38,7 +38,7 @@ const team = [
     'Аудит · CRM · коммуникация',
   ],
   [
-    'Михаил О.',
+    'Михаил',
     'AI/ML-разработчик',
     'AI / ML',
     'AI-модули · машинное обучение',
@@ -165,29 +165,20 @@ export function CompanyPageContent() {
           </Reveal>
 
           <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
-            {team.map(([name, role, group, focus], index) => (
+            {team.map(([name, role], index) => (
               <Reveal delay={(index % 4) * 0.04} key={`${name}-${role}`}>
-                <article className="group flex min-h-68 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-white/11 bg-white/[0.045] p-6 transition-colors hover:bg-white/[0.075]">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="grid size-11 place-items-center rounded-full border border-[#aebeff]/20 bg-[#aebeff]/8 text-[14px] font-semibold text-[#c0cafa]">
+                <article className="group flex min-h-56 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-white/11 bg-white/[0.045] p-6 transition-colors hover:bg-white/[0.075]">
+                  <div>
+                    <span className="grid size-16 place-items-center rounded-full border border-[#aebeff]/20 bg-[#aebeff]/8 text-[18px] font-semibold text-[#c0cafa]">
                       {name.slice(0, 1)}
                     </span>
-                    <span className="font-mono text-[9px] text-white/24">
-                      {String(index + 1).padStart(2, '0')} / 07
-                    </span>
                   </div>
-                  <div className="mt-10">
-                    <p className="text-[10px] font-semibold tracking-[0.1em] text-[#aebeff]">
-                      {group.toUpperCase()}
-                    </p>
-                    <h3 className="mt-3 text-[1.45rem] font-[550] tracking-[-0.035em]">
+                  <div className="mt-8">
+                    <h3 className="text-[1.45rem] font-[550] tracking-[-0.035em]">
                       {name}
                     </h3>
-                    <p className="mt-1 min-h-11 text-[13px] leading-relaxed text-white/52">
+                    <p className="mt-2 text-[13px] leading-relaxed text-white/52">
                       {role}
-                    </p>
-                    <p className="mt-5 border-t border-white/10 pt-4 text-[11px] leading-relaxed text-white/34">
-                      {focus}
                     </p>
                   </div>
                 </article>

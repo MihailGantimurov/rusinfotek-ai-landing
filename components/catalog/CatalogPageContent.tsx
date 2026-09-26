@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/accordion';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { Logo } from '@/components/layout/Logo';
 import { InternalCta, InternalHero } from '@/components/internal/InternalPage';
 import { HardLink } from '@/components/shared/HardLink';
 import { Reveal } from '@/components/shared/Reveal';
@@ -31,7 +32,14 @@ export function CatalogPageContent() {
       <InternalHero
         code="CATALOG / 14 PRODUCTS"
         eyebrow="МОДУЛЬНАЯ AI-АВТОМАТИЗАЦИЯ"
-        title="Каталог решений РусИнфоТек"
+        title={
+          <span className="flex flex-col items-start gap-4">
+            <span>Каталог решений</span>
+            <span className="rounded-[14px] border border-white/12 bg-white px-5 py-4 sm:px-7">
+              <Logo />
+            </span>
+          </span>
+        }
         lead={modularityDescription}
       >
         <a
@@ -69,9 +77,13 @@ export function CatalogPageContent() {
                 >
                   <div className="flex items-start justify-between gap-6">
                     <div>
-                      <p className="font-mono text-[10px] tracking-[0.12em] text-[#5d73c4]">
-                        {direction.number} / DIRECTION
-                      </p>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-[10px] tracking-[0.12em] text-[#5d73c4]">
+                          {direction.number}
+                        </span>
+                        <span className="h-3.5 w-px bg-[#10233b]/14" />
+                        <Logo className="h-4 w-auto" />
+                      </div>
                       <h3 className="mt-4 text-[clamp(1.8rem,3vw,3.1rem)] font-[540] tracking-[-0.045em]">
                         {direction.title}
                       </h3>
@@ -126,15 +138,20 @@ export function CatalogPageContent() {
                       {direction.delivery}
                     </p>
                   ) : null}
-                  <p className="mt-8 inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.08em] text-[#5d73c4]">
-                    <Layers3 className="size-4" />
-                    {direction.modules.length}{' '}
-                    {direction.modules.length === 1
-                      ? 'ПРОДУКТ'
-                      : direction.modules.length < 5
-                        ? 'ПРОДУКТА'
-                        : 'МОДУЛЕЙ'}
-                  </p>
+                  <div className="mt-8 rounded-[16px] border border-[#5d73c4]/18 bg-[#5d73c4]/6 p-4 text-[#354e9e]">
+                    <p className="flex items-center gap-2 text-[15px] font-semibold">
+                      <Layers3 className="size-5" />
+                      {direction.modules.length}{' '}
+                      {direction.modules.length === 1
+                        ? 'САМОСТОЯТЕЛЬНЫЙ ПРОДУКТ'
+                        : direction.modules.length < 5
+                          ? 'САМОСТОЯТЕЛЬНЫХ ПРОДУКТА'
+                          : 'САМОСТОЯТЕЛЬНЫХ МОДУЛЕЙ'}
+                    </p>
+                    <p className="mt-2 text-[12px] leading-relaxed text-[#10233b]/55">
+                      Каждый модуль можно внедрить как отдельное готовое решение.
+                    </p>
+                  </div>
                 </div>
 
                 <Accordion
@@ -150,12 +167,15 @@ export function CatalogPageContent() {
                       value={module.id}
                     >
                       <AccordionTrigger className="group rounded-none py-7 hover:no-underline sm:py-9">
-                        <span className="grid flex-1 gap-3 pr-5 text-left sm:grid-cols-[5rem_1fr] sm:items-start">
-                          <span className="font-mono text-[10px] tracking-[0.12em] text-[#6075c7]">
-                            {module.type.toUpperCase()} / {module.number}
-                          </span>
+                        <span className="flex flex-1 flex-col gap-2 pr-5 text-left">
                           <span className="text-[clamp(1.4rem,2.5vw,2.45rem)] font-[530] leading-[1.12] tracking-[-0.04em] text-[#10233b]">
+                            <span className="text-[#5b71c4]">
+                              {module.type} {Number(module.number)}.
+                            </span>{' '}
                             {module.title}
+                          </span>
+                          <span className="text-[11px] font-medium tracking-[0.04em] text-[#10233b]/42">
+                            САМОСТОЯТЕЛЬНЫЙ ПРОДУКТ
                           </span>
                         </span>
                       </AccordionTrigger>
@@ -218,13 +238,16 @@ export function CatalogPageContent() {
       <section className="bg-[#eef0ee] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 xl:px-16">
         <Reveal className="mx-auto grid max-w-[1440px] gap-8 rounded-[28px] border border-[#10233b]/10 bg-[#f7f7f5] p-7 sm:p-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:p-14">
           <div>
-            <p className="section-label">ПРИНЦИП LAND-AND-EXPAND</p>
             <h2 className="mt-5 text-[clamp(2.1rem,4vw,4.2rem)] font-[530] leading-[1.04] tracking-[-0.05em]">
-              Один модуль сегодня. Единый контур завтра.
+              Модульный принцип автоматизации
             </h2>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
-            {['Аудит процесса', 'Запуск модуля', 'Расширение контура'].map(
+            {[
+              'Запуск первого модуля',
+              'Измеримый результат — ускорение процесса',
+              'Запуск комплексной автоматизации',
+            ].map(
               (step, index) => (
                 <div
                   className="rounded-[16px] border border-[#10233b]/9 bg-white p-5"

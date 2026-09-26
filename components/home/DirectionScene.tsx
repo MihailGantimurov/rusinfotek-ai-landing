@@ -3,6 +3,8 @@ import {
   Check,
   CircleDot,
   FileText,
+  Inbox,
+  MessagesSquare,
   Route,
   Sparkles,
 } from 'lucide-react';
@@ -14,7 +16,7 @@ type DirectionSceneProps = {
 };
 
 const sceneCopy = {
-  sales: ['ПРОДАЖИ / CRM', 'Клиентский путь без разрывов'],
+  sales: ['ПРОДАЖИ / ЕДИНЫЙ ВХОД', 'Все заявки в одном управляемом контуре'],
   logistics: [
     'ЛОГИСТИКА / CONTROL TOWER',
     'Заявка движется по единому маршруту',
@@ -28,41 +30,62 @@ const sceneCopy = {
 
 function SalesScene() {
   return (
-    <div className="grid h-full min-h-0 gap-3 sm:grid-cols-3">
-      {[
-        ['01', 'Входящие', ['Сайт', 'Телефония', 'Мессенджеры']],
-        ['02', 'AI-слой', ['Квалификация', 'Резюме', 'Следующий шаг']],
-        ['03', 'CRM', ['Сделка', 'Задача', 'Контроль']],
-      ].map(([number, title, items], index) => (
-        <div
-          className="relative min-h-0 rounded-[16px] border border-white/12 bg-white/[0.065] p-4"
-          key={title as string}
-        >
-          <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] text-white/40">
-              {number as string}
-            </span>
-            {index < 2 ? (
-              <ArrowRight className="size-3.5 text-[#bac6ff]/60" />
-            ) : (
-              <Check className="size-3.5 text-[#9ce8dc]" />
-            )}
-          </div>
-          <p className="mt-4 text-[15px] font-semibold text-white xl:mt-5">
-            {title as string}
-          </p>
-          <div className="mt-3 space-y-2">
-            {(items as string[]).map((item) => (
-              <div
-                className="rounded-[9px] border border-white/8 bg-[#061529]/34 px-3 py-2 text-[11px] text-white/58"
-                key={item}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+    <div className="grid h-full min-h-0 gap-3 sm:grid-cols-[.82fr_1fr_1.18fr]">
+      <div className="rounded-[16px] border border-dashed border-white/14 bg-[#07182b]/34 p-3.5">
+        <p className="font-mono text-[9px] tracking-[0.1em] text-white/38">
+          БЫЛО · РАЗНЫЕ КАНАЛЫ
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-1">
+          {['Сайт', 'Телефон', 'Почта', 'Мессенджеры'].map((item, index) => (
+            <div
+              className={`rounded-[9px] border border-white/9 bg-white/[0.045] px-3 py-2 text-[10px] text-white/52 ${index % 2 ? 'sm:ml-3' : 'sm:mr-3'}`}
+              key={item}
+            >
+              {item}
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <div className="relative flex min-h-0 flex-col justify-center rounded-[16px] border border-[#95a8f2]/24 bg-[#6078cf]/12 p-4 text-center shadow-[0_0_36px_rgba(95,119,205,.13)]">
+        <span className="mx-auto grid size-10 place-items-center rounded-full border border-[#aebeff]/25 bg-[#aebeff]/10 text-[#c4ceff]">
+          <Inbox className="size-4" />
+        </span>
+        <p className="mt-3 text-[14px] font-semibold text-white">
+          Единый AI-центр
+        </p>
+        <p className="mt-1 text-[10px] leading-relaxed text-white/46">
+          Приём · квалификация · маршрутизация
+        </p>
+        <ArrowRight className="absolute -right-2.5 top-1/2 hidden size-5 -translate-y-1/2 rounded-full bg-[#193a5c] p-1 text-[#aebeff] sm:block" />
+      </div>
+
+      <div className="rounded-[16px] border border-[#76d7cc]/18 bg-white/[0.065] p-3.5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-mono text-[9px] tracking-[0.1em] text-[#9ce8dc]">
+            СТАЛО · ЕДИНАЯ ОЧЕРЕДЬ
+          </p>
+          <Check className="size-3.5 text-[#9ce8dc]" />
+        </div>
+        <div className="mt-3 space-y-2">
+          {[
+            ['Заявка #142', 'Анна · в работе'],
+            ['Заявка #141', 'CRM · назначена'],
+            ['Заявка #140', 'Ответ · 4 мин'],
+          ].map(([request, status]) => (
+            <div
+              className="flex items-center gap-2 rounded-[10px] border border-white/8 bg-[#061529]/34 px-3 py-2"
+              key={request}
+            >
+              <MessagesSquare className="size-3 shrink-0 text-[#aebeff]" />
+              <div className="min-w-0">
+                <p className="truncate text-[10px] font-medium text-white/75">{request}</p>
+                <p className="truncate text-[9px] text-white/38">{status}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

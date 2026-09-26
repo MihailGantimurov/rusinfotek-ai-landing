@@ -33,8 +33,8 @@ const integrations = [
 const approachSteps = [
   {
     number: '01',
-    title: 'Понимаем реальный процесс',
-    text: 'Разбираем, как сегодня движутся заявки, решения, документы и ответственность внутри команды.',
+    title: 'Аудит процессов',
+    text: 'Определяем, как сейчас устроен операционный процесс: задачи, участники, регламенты и сроки.',
   },
   {
     number: '02',
@@ -60,48 +60,48 @@ const approachSteps = [
 
 const cases = [
   {
-    name: 'Technoprint / Merchstore',
+    name: 'Производственно-сервисная компания',
     eyebrow: 'AI-экосистема',
-    attribution: 'Совместная разработка с Laplace Systems',
-    task: 'Объединить продажи, CRM, коммуникации, 1С и сервисные процессы.',
+    attribution: 'Комплексная автоматизация · NDA',
+    task: 'Собрать продажи, CRM, коммуникации, 1С и сервисные процессы в одном рабочем пространстве.',
     solution:
-      'Связать каналы, AI-агентов, CRM и производство в общей логике работы.',
+      'Объединить каналы, AI-агентов, CRM и производство общей логикой действий.',
     results: [
       '15+ модулей в едином цифровом контуре',
       'Все каналы и события под контролем 24/7',
     ],
-    image: '/media/technoprint-platform.jpg',
-    imageAlt: 'Обезличенный интерфейс партнёрской платформы Technoprint',
-    mediaLabel: 'Реальный интерфейс · данные обезличены',
+    image: '/media/case-unified-operations.png',
+    imageAlt: 'Демонстрационный интерфейс единого операционного центра',
+    mediaLabel: 'Демонстрационный интерфейс · данные изменены',
     palette: 'from-[#152553] via-[#55528b] to-[#b0a4ce]',
   },
   {
-    name: 'AI-прозвон',
+    name: 'Проект исходящей квалификации',
     eyebrow: 'Лидогенерация',
-    attribution: 'Партнёрское агентство геомаркетинга · NDA',
-    task: 'Быстро выявлять компании, заинтересованные в продвижении на картах.',
+    attribution: 'Квалификация спроса · NDA',
+    task: 'Оперативно находить компании с подтверждённым интересом без расширения отдела продаж.',
     solution:
-      'AI-оператор проводит первичный диалог и передаёт тёплые лиды менеджерам.',
+      'AI-оператор проводит первый разговор, определяет интерес и передаёт менеджерам квалифицированные контакты.',
     results: ['30+ лидов за первые 3 дня', 'Цена лида — менее 500 ₽'],
-    image: '/media/ai-calls-results.jpg',
-    imageAlt: 'Обезличенная таблица результатов исходящего AI-прозвона',
-    mediaLabel: 'Результаты прозвона · данные обезличены',
+    image: '/media/case-ai-qualification.png',
+    imageAlt: 'Демонстрационная аналитика исходящей AI-квалификации',
+    mediaLabel: 'Демонстрационная аналитика · данные изменены',
     palette: 'from-[#123a56] via-[#397b88] to-[#a8c7c0]',
   },
   {
-    name: 'SkinCars',
+    name: 'Сеть автомобильных сервисов',
     eyebrow: 'AI-консультант',
     attribution: 'Мультиканальная обработка обращений',
-    task: 'Обрабатывать обращения из Avito, мессенджеров, сайта, карт и звонков без очереди.',
+    task: 'Принимать обращения из площадок, мессенджеров, сайта, карт и телефонии без очередей и потери контекста.',
     solution:
-      'AI консультирует, квалифицирует клиента, фиксирует данные и ставит бронь.',
+      'AI консультирует, уточняет потребность, сохраняет контекст и назначает следующее действие.',
     results: [
       '90% входящих обращений закрывает AI',
       'Первичная консультация доступна 24/7',
     ],
-    image: '/media/skincars-chat.jpg',
-    imageAlt: 'Обезличенный диалог клиента с AI-консультантом SkinCars',
-    mediaLabel: 'Фрагмент диалога · данные обезличены',
+    image: '/media/case-omnichannel-consultant.png',
+    imageAlt: 'Демонстрационный интерфейс мультиканального AI-консультанта',
+    mediaLabel: 'Демонстрационный интерфейс · данные изменены',
     palette: 'from-[#18343c] via-[#4b686d] to-[#b2b8ad]',
   },
 ];
@@ -177,7 +177,7 @@ const team = [
     focus: 'Аудит · CRM · коммуникация',
   },
   {
-    name: 'Михаил О.',
+    name: 'Михаил',
     role: 'AI/ML-разработчик',
     group: 'AI / ML',
     focus: 'AI-модули · машинное обучение',
@@ -265,7 +265,7 @@ export function Approach() {
           <div>
             <p className="section-label">КАК МЫ РАБОТАЕМ</p>
             <h2 className="section-title mt-5 max-w-3xl">
-              Встраиваем AI внутрь бизнеса, а не рядом с ним
+              Встраиваем AI в действующий контур бизнеса
             </h2>
           </div>
           <p className="max-w-2xl text-[18px] leading-[1.7] text-[#10233b]/60 lg:justify-self-end">
@@ -598,31 +598,22 @@ export function TeamSection() {
               delay={(index % 4) * 0.04}
               key={`${member.name}-${member.role}`}
             >
-              <article className="group relative flex min-h-64 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-[#10233b]/9 bg-[#f7f7f5] p-6 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_55px_rgba(16,35,59,.07)]">
+              <article className="group relative flex min-h-56 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-[#10233b]/9 bg-[#f7f7f5] p-6 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_55px_rgba(16,35,59,.07)]">
                 <div
                   aria-hidden="true"
                   className="absolute -right-12 -top-14 size-36 rounded-full bg-[#7c91dc]/10 blur-2xl transition-transform duration-500 group-hover:scale-125"
                 />
-                <div className="relative flex items-start justify-between gap-4">
-                  <span className="grid size-11 place-items-center rounded-full border border-[#6075c7]/20 bg-[#6075c7]/8 text-[14px] font-semibold text-[#425baf]">
+                <div className="relative">
+                  <span className="grid size-16 place-items-center rounded-full border border-[#6075c7]/20 bg-[#6075c7]/8 text-[18px] font-semibold text-[#425baf]">
                     {member.name.slice(0, 1)}
                   </span>
-                  <span className="font-mono text-[10px] text-[#10233b]/28">
-                    {String(index + 1).padStart(2, '0')} / 07
-                  </span>
                 </div>
-                <div className="relative mt-10">
-                  <p className="text-[10px] font-semibold tracking-[0.1em] text-[#6075c7]">
-                    {member.group.toUpperCase()}
-                  </p>
-                  <h3 className="mt-3 text-[22px] font-[560] tracking-[-0.035em] text-[#10233b]">
+                <div className="relative mt-8">
+                  <h3 className="text-[22px] font-[560] tracking-[-0.035em] text-[#10233b]">
                     {member.name}
                   </h3>
-                  <p className="mt-1 min-h-10 text-[14px] leading-relaxed text-[#10233b]/58">
+                  <p className="mt-2 text-[14px] leading-relaxed text-[#10233b]/58">
                     {member.role}
-                  </p>
-                  <p className="mt-5 border-t border-[#10233b]/9 pt-4 text-[12px] leading-relaxed text-[#10233b]/42">
-                    {member.focus}
                   </p>
                 </div>
               </article>

@@ -6,7 +6,7 @@ import { Reveal } from '@/components/shared/Reveal';
 
 type InternalHeroProps = {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   lead: string;
   code: string;
   children?: ReactNode;
