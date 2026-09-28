@@ -15,6 +15,7 @@ import { HardLink } from '@/components/shared/HardLink';
 import { MediaFrame } from '@/components/shared/MediaFrame';
 import { Reveal } from '@/components/shared/Reveal';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { team } from '@/content/team';
 
 const integrations = [
   '1С',
@@ -142,51 +143,6 @@ const roles = [
     result:
       'Согласованная схема интеграций, контролируемое размещение и требования ИБ в проектировании.',
     directions: ['Интеграции', 'Безопасность', 'Документооборот'],
-  },
-];
-
-const team = [
-  {
-    name: 'Анна',
-    role: 'Генеральный директор',
-    group: 'Стратегия',
-    focus: 'Финансовый результат · партнёрства',
-  },
-  {
-    name: 'Михаил',
-    role: 'Директор по развитию',
-    group: 'Продукт',
-    focus: 'Линейка решений · развитие команды',
-  },
-  {
-    name: 'Андрей',
-    role: 'Операционный директор',
-    group: 'Operations',
-    focus: 'Регламенты · координация · KPI',
-  },
-  {
-    name: 'Дмитрий',
-    role: 'Директор по информационной безопасности',
-    group: 'Security',
-    focus: 'ИБ · тестирование · стандарты',
-  },
-  {
-    name: 'Роман',
-    role: 'Работа с ключевыми клиентами',
-    group: 'Business',
-    focus: 'Аудит · CRM · коммуникация',
-  },
-  {
-    name: 'Михаил',
-    role: 'AI/ML-разработчик',
-    group: 'AI / ML',
-    focus: 'AI-модули · машинное обучение',
-  },
-  {
-    name: 'Егор',
-    role: 'Технический директор',
-    group: 'Engineering',
-    focus: 'Архитектура · интеграции · качество',
   },
 ];
 
@@ -588,27 +544,17 @@ export function TeamSection() {
             </h2>
           </div>
           <p className="max-w-xl text-[17px] leading-[1.75] text-[#10233b]/58 lg:justify-self-end">
-            Проекты ведут руководители направлений, специалисты по интеграциям,
-            AI/ML и информационной безопасности.
+            Руководители, с которыми можно обсудить задачу напрямую.
           </p>
         </Reveal>
-        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-3 md:grid-cols-3">
           {team.map((member, index) => (
             <Reveal
               delay={(index % 4) * 0.04}
               key={`${member.name}-${member.role}`}
             >
-              <article className="group relative flex min-h-56 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-[#10233b]/9 bg-[#f7f7f5] p-6 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_20px_55px_rgba(16,35,59,.07)]">
-                <div
-                  aria-hidden="true"
-                  className="absolute -right-12 -top-14 size-36 rounded-full bg-[#7c91dc]/10 blur-2xl transition-transform duration-500 group-hover:scale-125"
-                />
-                <div className="relative">
-                  <span className="grid size-16 place-items-center rounded-full border border-[#6075c7]/20 bg-[#6075c7]/8 text-[18px] font-semibold text-[#425baf]">
-                    {member.name.slice(0, 1)}
-                  </span>
-                </div>
-                <div className="relative mt-8">
+              <article className="flex min-h-48 h-full flex-col justify-between rounded-[20px] border border-[#10233b]/9 bg-[#f7f7f5] p-6">
+                <div>
                   <h3 className="text-[22px] font-[560] tracking-[-0.035em] text-[#10233b]">
                     {member.name}
                   </h3>
@@ -616,6 +562,9 @@ export function TeamSection() {
                     {member.role}
                   </p>
                 </div>
+                <a className="mt-8 w-fit text-[16px] font-medium text-[#425baf] hover:underline" href={member.phoneHref}>
+                  {member.phone}
+                </a>
               </article>
             </Reveal>
           ))}

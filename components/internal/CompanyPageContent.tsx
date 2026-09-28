@@ -5,51 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { Reveal } from '@/components/shared/Reveal';
 import { ScrollProgress } from '@/components/shared/ScrollProgress';
-
-const team = [
-  [
-    'Анна',
-    'Генеральный директор',
-    'Стратегия',
-    'Финансовый результат · партнёрства',
-  ],
-  [
-    'Михаил',
-    'Директор по развитию',
-    'Продукт',
-    'Линейка решений · развитие команды',
-  ],
-  [
-    'Андрей',
-    'Операционный директор',
-    'Operations',
-    'Регламенты · координация · KPI',
-  ],
-  [
-    'Дмитрий',
-    'Директор по информационной безопасности',
-    'Security',
-    'ИБ · тестирование · стандарты',
-  ],
-  [
-    'Роман',
-    'Работа с ключевыми клиентами',
-    'Business',
-    'Аудит · CRM · коммуникация',
-  ],
-  [
-    'Михаил',
-    'AI/ML-разработчик',
-    'AI / ML',
-    'AI-модули · машинное обучение',
-  ],
-  [
-    'Егор',
-    'Технический директор',
-    'Engineering',
-    'Архитектура · интеграции · качество',
-  ],
-];
+import { team } from '@/content/team';
 
 export function CompanyPageContent() {
   return (
@@ -159,28 +115,25 @@ export function CompanyPageContent() {
               </h2>
             </div>
             <p className="max-w-2xl text-[17px] leading-[1.72] text-white/56 lg:justify-self-end">
-              Руководители направлений работают вместе со специалистами по
-              интеграциям, AI/ML и информационной безопасности.
+              Руководители, с которыми можно обсудить задачу напрямую.
             </p>
           </Reveal>
 
-          <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
-            {team.map(([name, role], index) => (
-              <Reveal delay={(index % 4) * 0.04} key={`${name}-${role}`}>
-                <article className="group flex min-h-56 h-full flex-col justify-between overflow-hidden rounded-[20px] border border-white/11 bg-white/[0.045] p-6 transition-colors hover:bg-white/[0.075]">
+          <div className="mt-14 grid gap-3 md:grid-cols-3 lg:mt-20">
+            {team.map((member, index) => (
+              <Reveal delay={index * 0.04} key={member.name}>
+                <article className="flex min-h-48 h-full flex-col justify-between rounded-[20px] border border-white/11 bg-white/[0.045] p-6">
                   <div>
-                    <span className="grid size-16 place-items-center rounded-full border border-[#aebeff]/20 bg-[#aebeff]/8 text-[18px] font-semibold text-[#c0cafa]">
-                      {name.slice(0, 1)}
-                    </span>
-                  </div>
-                  <div className="mt-8">
                     <h3 className="text-[1.45rem] font-[550] tracking-[-0.035em]">
-                      {name}
+                      {member.name}
                     </h3>
                     <p className="mt-2 text-[13px] leading-relaxed text-white/52">
-                      {role}
+                      {member.role}
                     </p>
                   </div>
+                  <a className="mt-8 w-fit text-[16px] font-medium text-[#c0cafa] hover:underline" href={member.phoneHref}>
+                    {member.phone}
+                  </a>
                 </article>
               </Reveal>
             ))}
